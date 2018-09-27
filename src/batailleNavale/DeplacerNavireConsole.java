@@ -20,7 +20,7 @@ public class DeplacerNavireConsole implements DeplacerNavire {
 			else {
 				for(int i = 0; i < flotte.size(); i++)
 				{
-					if(b != flotte.get(i) && b.colision(flotte.get(i)))
+					if(b != flotte.get(i) && b.collision(flotte.get(i)))
 					{
 						deplacementValide = false;
 						break;
@@ -43,7 +43,7 @@ public class DeplacerNavireConsole implements DeplacerNavire {
 			else {
 				for(int i = 0; i < flotte.size(); i++)
 				{
-					if(b != flotte.get(i) && b.colision(flotte.get(i)))
+					if(b != flotte.get(i) && b.collision(flotte.get(i)))
 					{
 						deplacementValide = false;
 						break;

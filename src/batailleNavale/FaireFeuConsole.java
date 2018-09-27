@@ -39,7 +39,8 @@ public class FaireFeuConsole implements FaireFeu {
 				}
 			}
 		}
-		ChoixEntree.ChoixCoordonneeParmiListe(ciblesPossibles, 'A', 'J', 1, 10, s);
+		s += "\nOù voulez-vous tirer?";
+		c = ChoixEntree.ChoixCoordonneeParmiListe(ciblesPossibles, 'A', 'J', 1, 10, s);
 		return c;
 	}
 

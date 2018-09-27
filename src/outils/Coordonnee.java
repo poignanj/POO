@@ -14,9 +14,8 @@ public class Coordonnee {
 	  }
 	  
 	  public String toString() {
-		  char axisX = (char) (x + '1');
 		  char axisY = (char) (y + 'A');
-		  return "" + axisY + axisX;
+		  return "" + axisY + (x+1);
 	  }
 	  
 	  @Override

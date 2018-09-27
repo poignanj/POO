@@ -19,18 +19,18 @@ public abstract class Bateau {
 		this.position = position;
 	}
 
-	// methode pour enelever des PVs au bateau
+	// methode pour enlever des PVs au bateau
 	public void dommage() {
 		this.impacts += 1;
 	}
 
-	// detecteur de colision missile-bateau
-	public boolean colision(Coordonnee c) {
+	// detecteur de collision missile-bateau
+	public boolean collision(Coordonnee c) {
 		return ((c.x >= position.debut.x && c.x <= position.fin.x) && (c.y >= position.debut.y && c.y <= position.fin.y));
 	}
 
-	// detecteur de colision bateau-bateau
-	public boolean colision(Bateau b) {
+	// detecteur de collision bateau-bateau
+	public boolean collision(Bateau b) {
 		return (this.getPosition().debut.x <= b.getPosition().fin.x &&
 				this.getPosition().fin.x >= b.getPosition().debut.x &&
 				this.getPosition().debut.y <= b.getPosition().fin.y &&

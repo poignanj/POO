@@ -69,12 +69,12 @@ public class Carte {
 		//TODO: interfacer l'output
 		System.out.println(this.toString());
 		if (!this.recevoirTir(c)) {
-			this.deplacer.deplacer(this.selection.selectionner(this.flotte), flotte);
+			this.deplacer.deplacer(this.selection.selectionner(this.flotte, "déplacer"), flotte);
 			majCarte();
 			System.out.println(this.toString());
 		}
 		if(!this.flotte.isEmpty())
-		return this.faireFeu.tirer(this.selection.selectionner(this.flotte));
+		return this.faireFeu.tirer(this.selection.selectionner(this.flotte, "utiliser pour tirer"));
 		else return null;
 	}
 
@@ -84,7 +84,7 @@ public class Carte {
 		if (c == null)
 			return false;
 		for (int i = 0; i < this.flotte.size(); i++) {
-			if (this.flotte.get(i).colision(c)) {
+			if (this.flotte.get(i).collision(c)) {
 				touche = true;
 				this.flotte.get(i).dommage();
 			}
