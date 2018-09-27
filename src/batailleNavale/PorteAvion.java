@@ -1,0 +1,10 @@
+package batailleNavale;
+
+public class PorteAvion extends Bateau{
+	public PorteAvion(){
+		this.taille = 5;
+		this.portee = 2;
+		this.impacts = 0;
+	}
+	
+}
