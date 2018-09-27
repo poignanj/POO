@@ -69,7 +69,8 @@ public class Carte {
 		//TODO: interfacer l'output
 		System.out.println(this.toString());
 		if (!this.recevoirTir(c)) {
-			this.deplacer.deplacer(this.selection.selectionner(this.flotte));
+			this.deplacer.deplacer(this.selection.selectionner(this.flotte), flotte);
+			majCarte();
 			System.out.println(this.toString());
 		}
 		if(!this.flotte.isEmpty())

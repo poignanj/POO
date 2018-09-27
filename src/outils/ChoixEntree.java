@@ -62,7 +62,7 @@ public class ChoixEntree {
 	public static int ChoixPlageInt(int min, int max, String message)
 	{
 		Scanner sc = new Scanner(System.in);
-		System.out.println(message + " " + min + "-" + max + " : ");
+		System.out.println(message + " [" + min + ";" + max + "] : ");
 		try
 		{
 			int input = sc.nextInt();

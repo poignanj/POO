@@ -28,4 +28,12 @@ public abstract class Bateau {
 	public boolean colision(Coordonnee c) {
 		return ((c.x >= position.debut.x && c.x <= position.fin.x) && (c.y >= position.debut.y && c.y <= position.fin.y));
 	}
+
+	// detecteur de colision bateau-bateau
+	public boolean colision(Bateau b) {
+		return (this.getPosition().debut.x < b.getPosition().fin.x &&
+				this.getPosition().fin.x > b.getPosition().debut.x &&
+				this.getPosition().debut.y < b.getPosition().fin.y &&
+				this.getPosition().fin.y > b.getPosition().debut.y );
+	}
 }
