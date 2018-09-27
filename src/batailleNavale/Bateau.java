@@ -18,13 +18,11 @@ public abstract class Bateau {
 		this.position = position;
 	}
 
+	public void dommage() {
+		this.impacts +=1;
+	}
 	public boolean colision(Coordonnee c) {
-		if ((c.x > position.debut.x && c.x < position.fin.x) && (c.y > position.debut.y && c.y < position.fin.y)){
-			this.impacts +=1;
-			return true;
-		}
-		else 
-			return false;
+		return((c.x > position.debut.x && c.x < position.fin.x) && (c.y > position.debut.y && c.y < position.fin.y));
 	}
 }
 

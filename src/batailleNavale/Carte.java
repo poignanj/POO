@@ -53,8 +53,11 @@ public class Carte {
 	private boolean recevoirTir(Coordonnee c) {
 		boolean touche = false;
 		for (int i = 0; i < this.flotte.size(); i++) {
-			touche = touche || this.flotte.get(i).colision(c);
-			if(this.flotte.get(i).impacts >= 2) {
+			if (this.flotte.get(i).colision(c)) {
+				touche = true;
+				this.flotte.get(i).dommage();
+			}
+			if (this.flotte.get(i).impacts >= 2) {
 				this.flotte.remove(i);
 				i--;
 			}
