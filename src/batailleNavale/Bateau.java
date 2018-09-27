@@ -31,9 +31,9 @@ public abstract class Bateau {
 
 	// detecteur de colision bateau-bateau
 	public boolean colision(Bateau b) {
-		return (this.getPosition().debut.x < b.getPosition().fin.x &&
-				this.getPosition().fin.x > b.getPosition().debut.x &&
-				this.getPosition().debut.y < b.getPosition().fin.y &&
-				this.getPosition().fin.y > b.getPosition().debut.y );
+		return (this.getPosition().debut.x <= b.getPosition().fin.x &&
+				this.getPosition().fin.x >= b.getPosition().debut.x &&
+				this.getPosition().debut.y <= b.getPosition().fin.y &&
+				this.getPosition().fin.y >= b.getPosition().debut.y );
 	}
 }

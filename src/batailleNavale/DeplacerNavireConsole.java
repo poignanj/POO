@@ -11,7 +11,7 @@ public class DeplacerNavireConsole implements DeplacerNavire {
 	public void deplacer(Bateau b, ArrayList<Bateau> flotte) {
 		boolean deplacementValide = true;
 		int choix = ChoixEntree.ChoixPlageInt(-2, 2, "De quelle distance voulez-vous déplacer ce bateau?");
-		if (b.getPosition().debut.x == b.getPosition().fin.x) {
+		if (b.getPosition().debut.y == b.getPosition().fin.y) {
 			b.getPosition().debut.x += choix;
 			b.getPosition().fin.x += choix;
 			if(b.getPosition().debut.x < 0 || b.getPosition().fin.x > Carte.TAILLE-1) {
