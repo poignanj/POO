@@ -30,27 +30,35 @@ public class Carte {
 			for (int j = 0; j < Carte.TAILLE; j++)
 				this.carte[i][j] = 0;
 		this.placerFlotte();
-		this.majCarte();
 	}
 
 	public void placerFlotte() {
 		// Parcours de la flotte et placement à chaque itération. Methode selon
 		// l'interface
 		for (int i = 0; i < this.flotte.size(); i++) {
+			System.out.println("\n\n\n");
+			System.out.println(this.toString());
 			Tuple placement = this.placer.placer(this.flotte.get(i));
 			this.flotte.get(i).setPosition(placement);
+			this.majCarte();
 		}
 	}
 
 	private void majCarte() {
 		// mise à jour du plateau pour visualisation externe
+		for (int i = 0; i < Carte.TAILLE; i++)
+			for (int j = 0; j < Carte.TAILLE; j++)
+				this.carte[i][j] = 0;
 		for (int k = 0; k < flotte.size(); k++)
-			if (flotte.get(k).getPosition().debut.x == flotte.get(k).getPosition().fin.x)
-				for (int i = flotte.get(k).getPosition().debut.y; i <= flotte.get(k).getPosition().fin.y; i++)
-					carte[flotte.get(k).getPosition().debut.x][i] = k + 1;
-			else
-				for (int i = flotte.get(k).getPosition().debut.x; i <= flotte.get(k).getPosition().fin.x; i++)
-					carte[i][flotte.get(k).getPosition().debut.y] = k + 1;
+			if (flotte.get(k).getPosition() != null)
+			{
+				if (flotte.get(k).getPosition().debut.x == flotte.get(k).getPosition().fin.x)
+					for (int i = flotte.get(k).getPosition().debut.y; i <= flotte.get(k).getPosition().fin.y; i++)
+						carte[flotte.get(k).getPosition().debut.x][i] = k + 1;
+				else
+					for (int i = flotte.get(k).getPosition().debut.x; i <= flotte.get(k).getPosition().fin.x; i++)
+						carte[i][flotte.get(k).getPosition().debut.y] = k + 1;
+			}
 	}
 
 	public Coordonnee tirer(Coordonnee c) {
@@ -88,8 +96,9 @@ public class Carte {
 	}
 	
 	public String toString() {
-		String s = "";
+		String s = "   ABCDEFGHIJ\n";
 		for (int i = 0; i < Carte.TAILLE; i++) {
+			s += String.format("%2d ", i+1);
 			for (int j = 0; j < Carte.TAILLE; j++)
 				s += this.carte[i][j];
 			s += "\n";

@@ -16,16 +16,13 @@ public class PlacerNavireConsole implements PlacerNavire {
 	public Tuple placer(Bateau b) {
 		Tuple t = new Tuple(new Coordonnee(0, 0), new Coordonnee(0, 0));
 		System.out.println("Vous placez un " + b.toString());
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Placez le point de départ de votre bateau. A-J :");
-		t.debut.x = sc.nextInt();
+		t.debut.x = ChoixEntree.ChoixPlageChar('A', 'J', "Placez le point de départ de votre bateau.", false) - 'A';
 		System.out.print("1-10 :");
-		t.debut.y = sc.nextInt();
-		System.out.print("Placez le point d'arrivée de votre bateau. A-J :");
-		t.fin.x = sc.nextInt();
+		t.debut.y = ChoixEntree.ChoixPlageInt(1, 10, "") - 1;
+		//Je suis en train d'arranger ça
+		t.debut.x = ChoixEntree.ChoixPlageChar('A', 'J', "Placez le point d'arrivée de votre bateau.", false) - 'A';
 		System.out.print("1-10 :");
-		t.fin.y = sc.nextInt();
+		t.debut.y = ChoixEntree.ChoixPlageInt(1, 10, "") - 1;
 		return t;
 	}
-
 }
