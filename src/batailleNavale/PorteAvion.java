@@ -7,4 +7,7 @@ public class PorteAvion extends Bateau{
 		this.impacts = 0;
 	}
 	
+	public String toString() {
+		return "Porte-Avion : " + (100-50*impacts) + "% de vie restante.";
+	}
 }

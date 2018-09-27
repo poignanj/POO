@@ -19,8 +19,10 @@ public class PlacerNavireConsole implements PlacerNavire {
 		t.fin.x = sc.nextInt();
 		System.out.print("1-10 :");
 		t.fin.y = sc.nextInt();
+		sc.close();
 		//TODO: faire vérification de position selon cases et taille bateau
 		// Ordoner debut et fin selon x ou y en fonction de l'inégalité (une valeure sera en doublon)
+		// Passer lettre > entier. Pour le moment, seuls les entier sont acceptés
 		return t;
 	}
 	
