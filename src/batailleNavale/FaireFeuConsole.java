@@ -39,6 +39,7 @@ public class FaireFeuConsole implements FaireFeu {
 				}
 			}
 		}
+		System.out.println(ciblesPossibles.toString());
 		s += "\nOù voulez-vous tirer?";
 		c = ChoixEntree.ChoixCoordonneeParmiListe(ciblesPossibles, 'A', 'J', 1, 10, s);
 		return c;

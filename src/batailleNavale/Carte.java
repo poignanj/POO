@@ -36,10 +36,9 @@ public class Carte {
 		// Parcours de la flotte et placement à chaque itération. Methode selon
 		// l'interface
 		for (int i = 0; i < this.flotte.size(); i++) {
-			System.out.println("\n\n\n");
+			System.out.println("\n\n");
 			System.out.println(this.toString());
-			Tuple placement = this.placer.placer(this.flotte.get(i));
-			this.flotte.get(i).setPosition(placement);
+			this.placer.placer(this.flotte.get(i), flotte);
 			this.majCarte();
 		}
 	}
@@ -65,14 +64,12 @@ public class Carte {
 		// recevoir le tir de l'autre joueur puis tirer. Methode faisant jouer le joueur
 		// en question.
 		//Renvoie la coordonnée du tir du joueur en cours ou null si le joueur n'a plus de bateaux
-		
-		//TODO: interfacer l'output
-		System.out.println(this.toString());
 		if (!this.recevoirTir(c)) {
-			this.deplacer.deplacer(this.selection.selectionner(this.flotte, "déplacer"), flotte);
-			majCarte();
 			System.out.println(this.toString());
+			this.deplacer.deplacer(this.selection.selectionner(this.flotte, "déplacer"), flotte);
 		}
+		this.majCarte();
+		System.out.println(this.toString());
 		if(!this.flotte.isEmpty())
 		return this.faireFeu.tirer(this.selection.selectionner(this.flotte, "utiliser pour tirer"));
 		else return null;
