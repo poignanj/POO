@@ -14,9 +14,17 @@ public class Coordonnee {
 	  }
 	  
 	  public String toString() {
-		  char axisX = (char) (x + 'A' - 1 );
-		  char axisY = (char) (y + '0');
-		  return "" + axisX + axisY;
-		  
+		  char axisX = (char) (x + '1');
+		  char axisY = (char) (y + 'A');
+		  return "" + axisY + axisX;
+	  }
+	  
+	  @Override
+	  public boolean equals(Object autre){
+	      if (autre == null) return false;
+	      if (autre == this) return true;
+	      if (!(autre instanceof Coordonnee))return false;
+	      Coordonnee autreCoordonnee = (Coordonnee)autre;
+	      return x == autreCoordonnee.x && y == autreCoordonnee.y;
 	  }
 }
