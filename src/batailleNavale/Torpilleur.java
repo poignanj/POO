@@ -8,7 +8,7 @@ public class Torpilleur extends Bateau {
 	}
 	@Override
 	public String toString() {
-		return "Torpilleur : " + (100-50*impacts) + "% de vie restante.";
+		return "Torpilleur (portée " + this.portee + ") : " + (100-50*impacts) + "% de vie restante.";
 	}
 
 }

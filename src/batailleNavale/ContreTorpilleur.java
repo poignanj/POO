@@ -8,7 +8,7 @@ public class ContreTorpilleur extends Bateau {
 	}
 	@Override
 	public String toString() {
-		return "Contre-Torpilleur : " + (100-50*impacts) + "% de vie restante.";
+		return "Contre-Torpilleur (portée " + this.portee + ") : " + (100-50*impacts) + "% de vie restante.";
 	}
 
 }

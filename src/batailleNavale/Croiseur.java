@@ -8,7 +8,7 @@ public class Croiseur extends Bateau {
 	}
 	@Override
 	public String toString() {
-		return "Croiseur : " + (100-50*impacts) + "% de vie restante.";
+		return "Croiseur (portée " + this.portee + ") : " + (100-50*impacts) + "% de vie restante.";
 	}
 
 }

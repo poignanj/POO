@@ -8,7 +8,7 @@ public class SousMarin extends Bateau {
 	}
 	@Override
 	public String toString() {
-		return "Sous-Marin : " + (100-50*impacts) + "% de vie restante.";
+		return "Sous-Marin (portée " + this.portee + ") : " + (100-50*impacts) + "% de vie restante.";
 	}
 
 }
