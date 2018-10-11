@@ -1,6 +1,6 @@
-package batailleNavale;
+package DEVOIR_1.src.batailleNavale;
 
-import outils.*;
+import DEVOIR_1.src.outils.*;
 
 public abstract class Bateau {
 	protected int taille;
