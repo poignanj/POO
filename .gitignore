@@ -8,7 +8,7 @@
 !README.md
 
 # Whitelisted directories/files
-!/Projet_cartes/
+!/Projet_cartes/src
+!.classpath
 
 # Blacklist bin folder
-/Projet_cartes/bin/*
