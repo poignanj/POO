@@ -1,6 +1,7 @@
 import outils.Vecteur2D;
 import java.util.Random;
 
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -8,7 +9,7 @@ public class Danger extends Thread {
 	private Map map;
 	private Vecteur2D position;
 	private long timeDanger = 3000;
-	private long timeSleep = 50;
+	private long timeSleep = 500;
 	private boolean dangerOn = false;
 	private float probability;
 	private float probabilityMin = 0.1f;
@@ -38,7 +39,8 @@ public class Danger extends Thread {
 	private void DangerOn() {
 		//TODO fixer position
 		dangerOn = true;
-		map.GetPigeons().forEach(p -> p.NewDanger(this));
+		//((Pane) representation.getParent()).getChildren().remove(representation);
+		//double h = ( representation.getParent().getParent()).getScene().getHeight();
 		double x = rand.nextDouble()* representation.getScene().getWidth();
 		double y = rand.nextDouble()* representation.getScene().getHeight();
 		representation.setCenterX(x);
@@ -46,6 +48,14 @@ public class Danger extends Thread {
 		
 		
 		representation.setVisible(true);
+		//map.GetPigeons().forEach(p -> p.NewDanger(this));
+		for (int i=0;i<map.GetPigeons().size();i++) {
+			System.out.println(i);
+			System.out.println(this);
+			Pigeon p = map.GetPigeons().get(i);
+			p.NewDanger(this);
+			System.out.println(i);
+		}
 	}
 	
 	private void DangerOff() {
@@ -98,5 +108,8 @@ public class Danger extends Thread {
 				
 			}
 		}
+	}
+	public Circle getRepresentation() {
+		return this.representation;
 	}
 }

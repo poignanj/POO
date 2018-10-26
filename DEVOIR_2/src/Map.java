@@ -63,6 +63,7 @@ public class Map extends Application {
 		spoiledNourritures = new ArrayList<Nourriture>();
 		danger = new Danger(getMap());
 		danger.start();
+		root.getChildren().add(danger.getRepresentation());
 	/*	float x1 = (float) (rand.nextFloat()* scene.getWidth());
 		float y1 = (float) (rand.nextFloat()* scene.getHeight());
 		Nourriture n = new Nourriture(new Vecteur2D(x1,11), getMap(), 50000);
