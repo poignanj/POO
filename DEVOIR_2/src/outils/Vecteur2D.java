@@ -17,6 +17,13 @@ public class Vecteur2D {
 		return new Vecteur2D(this.x - v.x, this.y - v.y);
 	}
 	
+	public Vecteur2D Addition(Vecteur2D v) {
+		return new Vecteur2D(this.x + v.x, this.y + v.y);
+	}
+	public Vecteur2D Multi(float m) {
+		return new Vecteur2D(this.x * m, this.y * m);
+	}
+	
 	public float Distance(Vecteur2D v) {
 		return Soustraction(v).Norme();
 	}
