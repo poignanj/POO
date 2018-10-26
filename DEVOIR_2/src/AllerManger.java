@@ -13,6 +13,7 @@ public class AllerManger extends Comportement {
 
 	@Override
 	public void ExecuteComportement() {
+		
 		Vecteur2D temp = this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse));
 		if(!this.map.outOfBounds(temp)) {
 			this.pigeon.SetPosition(temp);
