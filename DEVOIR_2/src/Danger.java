@@ -90,7 +90,7 @@ public class Danger extends Thread {
 					e.printStackTrace();
 				}
 				finally {
-					System.out.println("endsleep"+ probability);
+
 					if(rand.nextFloat() < probability)
 					{
 						DangerOn();
