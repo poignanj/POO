@@ -4,10 +4,16 @@ public class Pigeon extends Thread {
 	private Map map;
 	private Vecteur2D position;
 	private Comportement comportementActuel;
+	public static float LARGEUR = 5;
 	
 	public Vecteur2D GetPosition() {
 		return position;
 	}
+	
+	public void SetPosition(Vecteur2D v) {
+		this.position = v;
+	}
+	
 	
 	public Pigeon(Vecteur2D position, Map map) {
 		this.position = position;

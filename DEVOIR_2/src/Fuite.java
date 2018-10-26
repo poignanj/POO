@@ -1,3 +1,4 @@
+import outils.Vecteur2D;
 
 public class Fuite extends Comportement {
 	private Danger danger;
@@ -13,7 +14,9 @@ public class Fuite extends Comportement {
 	@Override
 	public void ExecuteComportement() {
 		// TODO Auto-generated method stub
-		this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse * -1));
+		Vecteur2D temp = this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse * -1));
+		if(!this.map.outOfBounds(temp))
+			this.pigeon.SetPosition(temp);
 	}
 
 	@Override

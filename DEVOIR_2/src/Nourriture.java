@@ -4,7 +4,7 @@ public class Nourriture extends Thread {
 	private Map map;
 	private Vecteur2D position;
 	private long timeBeforeSpoiled;
-	
+	public static float LARGEUR = 5;
 	public Vecteur2D GetPosition() {
 		return position;
 	}

@@ -13,6 +13,9 @@ public class AllerManger extends Comportement {
 	@Override
 	public void ExecuteComportement() {
 		this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse));
+		if(this.pigeon.GetPosition().Distance(this.but.GetPosition())<= Pigeon.LARGEUR + Nourriture.LARGEUR) {
+			but.Consume();
+		}
 	}
 
 	@Override
