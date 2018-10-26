@@ -8,7 +8,7 @@ public class Danger extends Thread {
 	private Map map;
 	private Vecteur2D position;
 	private long timeDanger = 3000;
-	private long timeSleep = 500;
+	private long timeSleep = 3000;
 	private boolean dangerOn = false;
 	private float probability;
 	private float probabilityMin = 0.1f;

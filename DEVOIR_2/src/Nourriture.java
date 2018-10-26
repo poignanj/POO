@@ -1,4 +1,3 @@
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import outils.*;
@@ -42,7 +41,7 @@ public class Nourriture extends Thread {
 		{
 			map.NourritureNotAvailable(this, true);
 			representation.setFill(Color.SADDLEBROWN);
-			//((Pane) representation.getParent()).getChildren().remove(representation);
+			//((Pane) representation..remove(representation);
 		}
 	}
 	

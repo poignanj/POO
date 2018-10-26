@@ -8,9 +8,11 @@ public class AllerManger extends Comportement {
 		this.pigeon = pigeon;
 		this.map = map;
 		this.vitesse = (float) 5;
+		this.updateDirection();
+	}
+	private void updateDirection() {
 		this.direction = this.but.GetPosition().Soustraction(this.pigeon.GetPosition()).Ortho();
 	}
-
 	@Override
 	public void ExecuteComportement() {
 		
@@ -29,6 +31,7 @@ public class AllerManger extends Comportement {
 	public void NewNourriture(Nourriture newNour) {
 		if(newNour.GetPosition().Distance(this.pigeon.GetPosition())<= this.but.GetPosition().Distance(this.pigeon.GetPosition()))
 			this.but = newNour;
+		this.updateDirection();
 	}
 	
 	public void NourritureNotAvailable(Nourriture notAvailable) {

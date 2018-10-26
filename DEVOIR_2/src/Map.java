@@ -37,7 +37,7 @@ public class Map extends Application {
 	}
 	
 	public boolean outOfBounds(Vecteur2D v) {
-		return ((v.x < (float) 0) || (v.x > Map.TAILLEX) || (v.y < (float) 0) || (v.y > Map.TAILLEY));
+		return ((v.x < (float) 0) || (v.x > Map.TAILLEX - 20) || (v.y < (float) 0) || (v.y > Map.TAILLEY - 20));
 	}
 	
 	public void NourritureNotAvailable(Nourriture notAvailable, boolean spoiled) {
@@ -71,8 +71,8 @@ public class Map extends Application {
 		int nbPigeon = rand.nextInt(NBMAXPIGEON);
 		if (nbPigeon==0)nbPigeon=1;
 		for (int i = 0;i<nbPigeon;i++) {
-			float x = (float) (rand.nextFloat()* scene.getWidth());
-			float y = (float) (rand.nextFloat()* scene.getHeight());
+			float x = (float) (rand.nextFloat()* scene.getWidth()- 20);
+			float y = (float) (rand.nextFloat()* scene.getHeight() - 20);
 			Pigeon p = new Pigeon(new Vecteur2D(x, y), this);
 			p.start();
 			pigeons.add(p);
