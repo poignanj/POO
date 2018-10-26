@@ -1,5 +1,17 @@
+import outils.*;
 
 public class Nourriture extends Thread {
+	private Map map;
+	private Vecteur2D position;
+	private float timeSpoiled;
+	
+	public Nourriture(Vecteur2D position, Map map, float timeBeforeSpoiled) {
+		
+	}
+	
+	public void Consume() {
+		
+	}
 
 	@Override
 	public void run() {
