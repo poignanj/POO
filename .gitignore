@@ -9,6 +9,9 @@
 
 # Whitelisted directories/files
 !/Projet_cartes/src
-!.classpath
+!/Projet_cartes/.classpath
+!/DEVOIR_2/src
+!/DEVOIR_2/.classpath
+!/DEVOIR_2/*.jpg
 
 # Blacklist bin folder
