@@ -8,6 +8,10 @@ public class Map {
 	public ArrayList<Nourriture> GetNourritures() {
 		return nourritures;
 	}
+	
+	public ArrayList<Pigeon> GetPigeons() {
+		return pigeons;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
