@@ -6,18 +6,22 @@ public class AllerManger extends Comportement {
 		this.but = but;
 		this.pigeon = pigeon;
 		this.map = map;
+		this.vitesse = (float) 0.1;
+		this.direction = this.but.GetPosition().Soustraction(this.pigeon.GetPosition());
 	}
 
 	@Override
 	public void ExecuteComportement() {
-		// TODO Auto-generated method stub
-		
+		this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse));
+		if(this.pigeon.GetPosition().Distance(this.but.GetPosition())<= Pigeon.LARGEUR + Nourriture.LARGEUR) {
+			but.Consume();
+		}
 	}
 
 	@Override
 	public void NewNourriture(Nourriture newNour) {
-		// TODO Auto-generated method stub
-		
+		if(newNour.GetPosition().Distance(this.pigeon.GetPosition())<= this.but.GetPosition().Distance(this.pigeon.GetPosition()))
+			this.but = newNour;
 	}
 	
 	public void NourritureNotAvailable(Nourriture notAvailable) {
