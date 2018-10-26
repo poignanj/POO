@@ -33,4 +33,9 @@ public class Vecteur2D {
 	public float Distance(Vecteur2D v) {
 		return Soustraction(v).Norme();
 	}
+	
+	public String toString() {
+		return x+";"+y;
+		
+	}
 }

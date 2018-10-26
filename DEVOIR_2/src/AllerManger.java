@@ -35,4 +35,9 @@ public class AllerManger extends Comportement {
 		if(notAvailable == but)
 			pigeon.RedifineComportement(new Idle(pigeon, map));
 	}
+	
+	public void NewDanger(Danger newDanger) {
+		pigeon.RedifineComportement(new Fuite(pigeon, newDanger, map));
+	}
+
 }

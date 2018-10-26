@@ -8,4 +8,5 @@ public abstract class Comportement {
 	
 	public abstract void ExecuteComportement();
 	public abstract void NewNourriture(Nourriture newNour);
+	public abstract void NewDanger(Danger newDanger);
 }

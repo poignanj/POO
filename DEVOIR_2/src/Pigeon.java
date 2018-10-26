@@ -35,7 +35,7 @@ public class Pigeon extends Thread {
 		while(true) {
 		comportementActuel.ExecuteComportement();
 		try {
-			this.sleep(500);
+			Pigeon.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class Pigeon extends Thread {
 	}
 	
 	public void NewDanger(Danger newDanger) {
-		comportementActuel = new Fuite(this, newDanger, map);
+		comportementActuel.NewDanger(newDanger);
 	}
 
 	public void NoMoreDanger() {

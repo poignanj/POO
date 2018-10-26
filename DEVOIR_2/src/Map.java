@@ -77,8 +77,9 @@ public class Map extends Application {
 			p.start();
 			pigeons.add(p);
 			root.getChildren().add(p.getRepresentation());
+			
 		}
-		
+
 		 
 	      EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 		         @Override 
@@ -99,7 +100,6 @@ public class Map extends Application {
 		            	for (int i= 0;i< pigeons.size();i++) {
 		            		pigeons.get(i).NewNourriture(n);
 		            	}
-		            	//System.out.println(root.getScene().toString() +root.getChildren().toString());
 		            
 		            } else if (e.getButton() == MouseButton.SECONDARY) {
 		            	//spoiledNourritures.get(0);

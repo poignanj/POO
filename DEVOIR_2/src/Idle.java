@@ -40,4 +40,7 @@ public class Idle extends Comportement {
 			pigeon.RedifineComportement(new AllerManger(pigeon, newNour, map));
 		}
 	}
+	public void NewDanger(Danger newDanger) {
+		pigeon.RedifineComportement(new Fuite(pigeon, newDanger, map));
+	}
 }

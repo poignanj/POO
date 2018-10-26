@@ -3,11 +3,12 @@ import outils.Vecteur2D;
 public class Fuite extends Comportement {
 	private Danger danger;
 	
-	public Fuite(Pigeon pigeon, Danger danger, Map map) {
-		this.danger = danger;
+	public Fuite(Pigeon pigeon, Danger d, Map map) {
+		this.danger = d;
 		this.pigeon = pigeon;
 		this.map = map;
 		this.vitesse = (float)15;
+		System.out.println(this.danger.GetPosition().toString() + "  :::  " + this.pigeon.GetPosition().toString());
 		this.direction = this.danger.GetPosition().Soustraction(this.pigeon.GetPosition()).Ortho();
 	}
 
@@ -25,5 +26,9 @@ public class Fuite extends Comportement {
 	@Override
 	public void NewNourriture(Nourriture newNour) {
 		pigeon.RedifineComportement(new AllerManger(this.pigeon, newNour,this.map));
+	}
+	
+	public void NewDanger(Danger newDanger) {
+		//pigeon.RedifineComportement(new Fuite(pigeon, newDanger, map));
 	}
 }
