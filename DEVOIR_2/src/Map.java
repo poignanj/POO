@@ -61,13 +61,13 @@ public class Map extends Application {
 		nourritures = new ArrayList<Nourriture>();
 		spoiledNourritures = new ArrayList<Nourriture>();
 		
-		float x1 = (float) (rand.nextFloat()* scene.getWidth());
+	/*	float x1 = (float) (rand.nextFloat()* scene.getWidth());
 		float y1 = (float) (rand.nextFloat()* scene.getHeight());
 		Nourriture n = new Nourriture(new Vecteur2D(x1,11), getMap(), 50000);
     	n.start();
     	nourritures.add(n);
     	root.getChildren().add(n.getRepresentation());
-		
+		*/
 		int nbPigeon = rand.nextInt(NBMAXPIGEON);
 		if (nbPigeon==0)nbPigeon=1;
 		for (int i = 0;i<nbPigeon;i++) {
@@ -83,7 +83,7 @@ public class Map extends Application {
 	      EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 		         @Override 
 		         public void handle(MouseEvent e) { 
-		            System.out.println("Hello World");
+		            
 		            if(e.getButton() == MouseButton.PRIMARY) {
 		            
 		            	Nourriture n = new Nourriture(new Vecteur2D((float)e.getSceneX(),(float)e.getSceneY()), getMap(), 5000);
@@ -99,7 +99,7 @@ public class Map extends Application {
 		            	for (int i= 0;i< pigeons.size();i++) {
 		            		pigeons.get(i).NewNourriture(n);
 		            	}
-		            	System.out.println(root.getScene().toString() +root.getChildren().toString());
+		            	//System.out.println(root.getScene().toString() +root.getChildren().toString());
 		            
 		            } else if (e.getButton() == MouseButton.SECONDARY) {
 		            	//spoiledNourritures.get(0);
