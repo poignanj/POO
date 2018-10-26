@@ -4,8 +4,8 @@ import java.util.Random;
 public class Danger extends Thread {
 	private Map map;
 	private Vecteur2D position;
-	private long timeDanger;
-	private long timeSleep;
+	private long timeDanger = 3000;
+	private long timeSleep = 50;
 	private boolean dangerOn = false;
 	private float probability;
 	private float probabilityMin = 0.1f;
@@ -24,6 +24,7 @@ public class Danger extends Thread {
 	}
 	
 	private void DangerOn() {
+		//TODO fixer position
 		dangerOn = true;
 		map.GetPigeons().forEach(p -> p.NewDanger(this));
 	}
