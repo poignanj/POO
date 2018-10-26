@@ -9,6 +9,10 @@ public class Danger extends Thread {
 	private float probabilityMin = 0.1f;
 	private float probabilityMax = 0.7f;
 	
+	public Vecteur2D GetPosition() {
+		return position;
+	}
+	
 	public Danger(Map map) {
 		this.map = map;
 	}

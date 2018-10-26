@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Idle extends Comportement {
 	private Map map;
+	private boolean nourrituresChecked = false;
 	
 	public Idle(Pigeon pigeon, Map map) {
 		this.map = map;
@@ -9,13 +12,33 @@ public class Idle extends Comportement {
 
 	@Override
 	public void ExecuteComportement() {
-		// TODO Auto-generated method stub
-		
+		if(!nourrituresChecked) {
+			ListIterator<Nourriture> it = map.GetNourritures().listIterator();
+			if(it.hasNext())
+			{
+				Nourriture nourritureProche = it.next();
+				float distMin = nourritureProche.GetPosition().Distance(pigeon.GetPosition());
+				while(it.hasNext())
+				{
+					Nourriture tmpNour = it.next();
+					float tmpDist = tmpNour.GetPosition().Distance(pigeon.GetPosition());
+					if(tmpDist < distMin)
+					{
+						nourritureProche = tmpNour;
+						distMin = tmpDist;
+					}
+				}
+				pigeon.RedifineComportement(new AllerManger(pigeon, nourritureProche));
+			}
+			nourrituresChecked = true;
+		}
 	}
 
 	@Override
 	public void NewNourriture(Nourriture newNour) {
-		// TODO Auto-generated method stub
-		
+		if(nourrituresChecked)
+		{
+			pigeon.RedifineComportement(new AllerManger(pigeon, newNour));
+		}
 	}
 }
