@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Map {
 	private ArrayList<Pigeon> pigeons;
 	private ArrayList<Nourriture> nourritures;
+	private ArrayList<Nourriture> spoiledNourritures; //Pour pouvoir les afficher
 	
 	public ArrayList<Nourriture> GetNourritures() {
 		return nourritures;
@@ -12,5 +13,11 @@ public class Map {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	public void NourritureNotAvailable(Nourriture notAvailable, boolean spoiled) {
+		nourritures.remove(notAvailable);
+		if(spoiled)
+			spoiledNourritures.add(notAvailable);
+		pigeons.forEach(p -> p.NourritureNotAvailable(notAvailable));
+	}
 }

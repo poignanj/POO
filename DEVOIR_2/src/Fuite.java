@@ -2,9 +2,10 @@
 public class Fuite extends Comportement {
 	private Danger danger;
 	
-	public Fuite(Pigeon pigeon, Danger danger) {
+	public Fuite(Pigeon pigeon, Danger danger, Map map) {
 		this.danger = danger;
 		this.pigeon = pigeon;
+		this.map = map;
 	}
 
 	@Override

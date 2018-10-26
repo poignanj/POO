@@ -28,7 +28,7 @@ public class Idle extends Comportement {
 						distMin = tmpDist;
 					}
 				}
-				pigeon.RedifineComportement(new AllerManger(pigeon, nourritureProche));
+				pigeon.RedifineComportement(new AllerManger(pigeon, nourritureProche, map));
 			}
 			nourrituresChecked = true;
 		}
@@ -38,7 +38,7 @@ public class Idle extends Comportement {
 	public void NewNourriture(Nourriture newNour) {
 		if(nourrituresChecked)
 		{
-			pigeon.RedifineComportement(new AllerManger(pigeon, newNour));
+			pigeon.RedifineComportement(new AllerManger(pigeon, newNour, map));
 		}
 	}
 }
