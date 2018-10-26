@@ -1,4 +1,9 @@
 
-public class Danger {
+public class Danger extends Thread {
 
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();
+	}
 }
