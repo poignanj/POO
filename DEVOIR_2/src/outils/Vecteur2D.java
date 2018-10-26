@@ -8,4 +8,16 @@ public class Vecteur2D {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public float Norme() {
+		return (float) Math.sqrt(x*x + y*y);
+	}
+	
+	public Vecteur2D Soustraction(Vecteur2D v) {
+		return new Vecteur2D(this.x - v.x, this.y - v.y);
+	}
+	
+	public float Distance(Vecteur2D v) {
+		return Soustraction(v).Norme();
+	}
 }

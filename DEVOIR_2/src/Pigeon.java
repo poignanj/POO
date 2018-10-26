@@ -5,6 +5,10 @@ public class Pigeon extends Thread {
 	private Vecteur2D position;
 	private Comportement comportementActuel;
 	
+	public Vecteur2D GetPosition() {
+		return position;
+	}
+	
 	public Pigeon(Vecteur2D position, Map map) {
 		this.position = position;
 		this.map = map;
@@ -13,16 +17,15 @@ public class Pigeon extends Thread {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		super.run();
+		comportementActuel.ExecuteComportement();
 	}
 	
 	public void NewDanger(Danger newDanger) {
-		
+		comportementActuel = new Fuite(this, newDanger);
 	}
 	
 	public void NewNourriture(Nourriture newNourriture) {
-		
+		comportementActuel.NewNourriture(newNourriture);
 	}
 	
 	public void RedifineComportement(Comportement newComportement) {
