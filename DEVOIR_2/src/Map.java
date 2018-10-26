@@ -24,6 +24,7 @@ public class Map extends Application {
 	private Random rand = new Random();
 	public static int NBMAXPIGEON = 12;
 	public  static long SPOILTIME = 5000;
+	private Danger danger;
 	
 	public ArrayList<Nourriture> GetNourritures() {
 		return nourritures;
@@ -60,7 +61,8 @@ public class Map extends Application {
 		pigeons = new ArrayList<Pigeon>();
 		nourritures = new ArrayList<Nourriture>();
 		spoiledNourritures = new ArrayList<Nourriture>();
-		
+		danger = new Danger(getMap());
+		danger.start();
 	/*	float x1 = (float) (rand.nextFloat()* scene.getWidth());
 		float y1 = (float) (rand.nextFloat()* scene.getHeight());
 		Nourriture n = new Nourriture(new Vecteur2D(x1,11), getMap(), 50000);

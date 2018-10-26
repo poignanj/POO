@@ -24,7 +24,7 @@ public class Danger extends Thread {
 	
 	public Danger(Map map) {
 		this.map = map;
-		RedifineProbability();
+ 
 		rand = new Random();
 		representation= new Circle();
 		representation.setCenterX(0);
@@ -56,11 +56,19 @@ public class Danger extends Thread {
 	}
 	
 	private void RedifineProbability() {
-		probability = rand.nextFloat()* (probabilityMax - probabilityMin) + probabilityMin;
+		//probability = rand.nextFloat()* (probabilityMax - probabilityMin) + probabilityMin;
+		probability = rand.nextFloat();
+		if (probability>probabilityMax) {
+			probability= probabilityMax;
+			
+		} else if (probability<probabilityMin) {
+			probability=probabilityMin;
+		}
 	}
 
 	@Override
 	public void run() {
+		RedifineProbability();
 		while(true) {
 			if(dangerOn) {
 				try {
@@ -80,8 +88,10 @@ public class Danger extends Thread {
 					e.printStackTrace();
 				}
 				finally {
+					System.out.println("endsleep"+ probability);
 					if(rand.nextFloat() < probability)
 					{
+						System.out.println("Danger");
 						DangerOn();
 					}
 				}
