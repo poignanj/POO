@@ -23,6 +23,13 @@ public class Pigeon extends Thread {
 	public void NewDanger(Danger newDanger) {
 		comportementActuel = new Fuite(this, newDanger, map);
 	}
+
+	public void NoMoreDanger() {
+		if(comportementActuel instanceof Fuite)
+		{
+			RedifineComportement(new Idle(this, map));
+		}
+	}
 	
 	public void NewNourriture(Nourriture newNourriture) {
 		comportementActuel.NewNourriture(newNourriture);
