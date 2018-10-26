@@ -32,7 +32,14 @@ public class Pigeon extends Thread {
 
 	@Override
 	public void run() {
+		while(true) {
 		comportementActuel.ExecuteComportement();
+		try {
+			this.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		}
 	}
 	
 	public void NewDanger(Danger newDanger) {

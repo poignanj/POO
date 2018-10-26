@@ -7,7 +7,7 @@ public class Fuite extends Comportement {
 		this.danger = danger;
 		this.pigeon = pigeon;
 		this.map = map;
-		this.vitesse = (float)100;
+		this.vitesse = (float)0.05;
 		this.direction = this.danger.GetPosition().Soustraction(this.pigeon.GetPosition());
 	}
 
