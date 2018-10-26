@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import outils.*;
 
 public class Pigeon extends Thread {
@@ -5,6 +7,7 @@ public class Pigeon extends Thread {
 	private Vecteur2D position;
 	private Comportement comportementActuel;
 	public static float LARGEUR = 5;
+	private Circle representation;
 	
 	public Vecteur2D GetPosition() {
 		return position;
@@ -19,6 +22,12 @@ public class Pigeon extends Thread {
 		this.position = position;
 		this.map = map;
 		comportementActuel = new Idle(this, map);
+		representation= new Circle();
+		representation.setCenterX((double)position.x);
+		representation.setCenterY((double) position.y);
+		representation.setRadius(LARGEUR);
+		representation.setFill(Color.DIMGRAY);
+		representation.setStrokeWidth(1);  
 	}
 
 	@Override
@@ -50,5 +59,9 @@ public class Pigeon extends Thread {
 	
 	public void RedifineComportement(Comportement newComportement) {
 		comportementActuel = newComportement;
+	}
+	
+	public Circle getRepresentation() {
+		return this.representation;
 	}
 }

@@ -15,8 +15,11 @@ public class Fuite extends Comportement {
 	public void ExecuteComportement() {
 		// TODO Auto-generated method stub
 		Vecteur2D temp = this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse * -1));
-		if(!this.map.outOfBounds(temp))
+		if(!this.map.outOfBounds(temp)) {
 			this.pigeon.SetPosition(temp);
+			this.pigeon.getRepresentation().relocate((double)temp.x, (double)temp.y);
+		}
+			
 	}
 
 	@Override

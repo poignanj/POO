@@ -1,6 +1,9 @@
 import outils.Vecteur2D;
 import java.util.Random;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 public class Danger extends Thread {
 	private Map map;
 	private Vecteur2D position;
@@ -12,6 +15,8 @@ public class Danger extends Thread {
 	private float probabilityMax = 0.7f;
 	private Random rand;
 	
+	private Circle representation;
+	
 	
 	public Vecteur2D GetPosition() {
 		return position;
@@ -21,18 +26,33 @@ public class Danger extends Thread {
 		this.map = map;
 		RedifineProbability();
 		rand = new Random();
+		representation= new Circle();
+		representation.setCenterX(0);
+		representation.setCenterY(0);
+		representation.setRadius(5f);
+		representation.setFill(Color.RED);
+		representation.setStrokeWidth(1);  
+		representation.setVisible(false);
 	}
 	
 	private void DangerOn() {
 		//TODO fixer position
 		dangerOn = true;
 		map.GetPigeons().forEach(p -> p.NewDanger(this));
+		double x = rand.nextDouble()* representation.getScene().getWidth();
+		double y = rand.nextDouble()* representation.getScene().getHeight();
+		representation.setCenterX(x);
+		representation.setCenterY(y);
+		
+		
+		representation.setVisible(true);
 	}
 	
 	private void DangerOff() {
 		dangerOn = false;
 		map.GetPigeons().forEach(p -> p.NoMoreDanger());
 		RedifineProbability();
+		representation.setVisible(false);
 	}
 	
 	private void RedifineProbability() {

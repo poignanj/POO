@@ -1,3 +1,4 @@
+import outils.Vecteur2D;
 
 public class AllerManger extends Comportement {
 	private Nourriture but;
@@ -12,7 +13,12 @@ public class AllerManger extends Comportement {
 
 	@Override
 	public void ExecuteComportement() {
-		this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse));
+		Vecteur2D temp = this.pigeon.GetPosition().Addition(this.direction.Multi(this.vitesse));
+		if(!this.map.outOfBounds(temp)) {
+			this.pigeon.SetPosition(temp);
+			this.pigeon.getRepresentation().relocate((double)temp.x, (double)temp.y);
+		}
+		//this.pigeon.getRepresentation().relocate((double)this.pigeon.GetPosition().x, (double)this.pigeon.GetPosition().y);
 		if(this.pigeon.GetPosition().Distance(this.but.GetPosition())<= Pigeon.LARGEUR + Nourriture.LARGEUR) {
 			but.Consume();
 		}
