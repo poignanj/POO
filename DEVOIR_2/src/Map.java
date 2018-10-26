@@ -44,7 +44,7 @@ public class Map extends Application {
 	
 	public void NourritureNotAvailable(Nourriture notAvailable, boolean spoiled) {
 		nourritures.remove(notAvailable);
-		//((Pane)notAvailable.getRepresentation().getParent()).getChildren().remove(notAvailable.getRepresentation());
+		
 		if(spoiled)
 			spoiledNourritures.add(notAvailable);
 		pigeons.forEach(p -> p.NourritureNotAvailable(notAvailable));
@@ -60,6 +60,14 @@ public class Map extends Application {
 		pigeons = new ArrayList<Pigeon>();
 		nourritures = new ArrayList<Nourriture>();
 		spoiledNourritures = new ArrayList<Nourriture>();
+		
+		float x1 = (float) (rand.nextFloat()* scene.getWidth());
+		float y1 = (float) (rand.nextFloat()* scene.getHeight());
+		Nourriture n = new Nourriture(new Vecteur2D(x1,11), getMap(), 50000);
+    	n.start();
+    	nourritures.add(n);
+    	root.getChildren().add(n.getRepresentation());
+		
 		int nbPigeon = rand.nextInt(NBMAXPIGEON);
 		if (nbPigeon==0)nbPigeon=1;
 		for (int i = 0;i<nbPigeon;i++) {
@@ -79,11 +87,15 @@ public class Map extends Application {
 		            if(e.getButton() == MouseButton.PRIMARY) {
 		            
 		            	Nourriture n = new Nourriture(new Vecteur2D((float)e.getSceneX(),(float)e.getSceneY()), getMap(), 5000);
-		            	// ImageTest c = new ImageTest(e.getSceneX(),e.getSceneY());
-		            	//l.add(c);
 		            	n.start();
 		            	nourritures.add(n);
 		            	root.getChildren().add(n.getRepresentation());
+		            	
+		            	////////////////
+		            	////////////////
+		            	//Notification des pigeons
+		            	////////////////
+		            	////////////////
 		            	for (int i= 0;i< pigeons.size();i++) {
 		            		pigeons.get(i).NewNourriture(n);
 		            	}
@@ -96,7 +108,7 @@ public class Map extends Application {
 		            	spoiledNourritures.remove(0);
 		            	}
 		            }
-		            //stage.hide();
+		            
 		         } 
 		      };  
 	      scene.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);  
@@ -111,15 +123,7 @@ public class Map extends Application {
 	         
 	      //Displaying the contents of the stage 
 	      primaryStage.show(); 
-	      //Creating the mouse event handler 
-	      
-	      //Registering the event filter 
-	       
-	       
-	      //Creating a Group object  
-	      
-	      
-	      //Creating a scene object 
+
 		
 	}
 }

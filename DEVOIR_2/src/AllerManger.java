@@ -7,7 +7,7 @@ public class AllerManger extends Comportement {
 		this.but = but;
 		this.pigeon = pigeon;
 		this.map = map;
-		this.vitesse = (float) 0.1;
+		this.vitesse = (float) 100;
 		this.direction = this.but.GetPosition().Soustraction(this.pigeon.GetPosition());
 	}
 
