@@ -27,7 +27,8 @@ public class Nourriture extends Thread {
 	
 	public void Consume() {
 		map.NourritureNotAvailable(this, false);
-		((Pane) representation.getParent()).getChildren().remove(representation);
+		representation.setVisible(false);
+		//((N) representation.getParent()).getChildren().remove(representation);
 	}
 
 	@Override
