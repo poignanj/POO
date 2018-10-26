@@ -29,6 +29,7 @@ public class Danger extends Thread {
 		representation= new Circle();
 		representation.setCenterX(0);
 		representation.setCenterY(0);
+		this.position= new Vecteur2D(0, 0);
 		representation.setRadius(5f);
 		representation.setFill(Color.RED);
 		representation.setStrokeWidth(1);  
@@ -45,16 +46,14 @@ public class Danger extends Thread {
 		representation.setCenterX(x);
 		representation.setCenterY(y);
 		
-		
+		this.position.x= (float) x;
+		this.position.y=(float) y;
 		representation.setVisible(true);
-		//map.GetPigeons().forEach(p -> p.NewDanger(this));
-		for (int i=0;i<map.GetPigeons().size();i++) {
-			System.out.println(i);
-			System.out.println(this);
+		map.GetPigeons().forEach(p -> p.NewDanger(this));
+		/*for (int i=0;i<map.GetPigeons().size();i++) {
 			Pigeon p = map.GetPigeons().get(i);
 			p.NewDanger(this);
-			System.out.println(i);
-		}
+		}*/
 	}
 	
 	private void DangerOff() {
@@ -97,10 +96,9 @@ public class Danger extends Thread {
 					e.printStackTrace();
 				}
 				finally {
-					System.out.println("endsleep"+ probability);
+
 					if(rand.nextFloat() < probability)
 					{
-						System.out.println("Danger");
 						DangerOn();
 					}
 				}

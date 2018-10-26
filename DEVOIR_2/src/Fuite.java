@@ -3,8 +3,8 @@ import outils.Vecteur2D;
 public class Fuite extends Comportement {
 	private Danger danger;
 	
-	public Fuite(Pigeon pigeon, Danger danger, Map map) {
-		this.danger = danger;
+	public Fuite(Pigeon pigeon, Danger d, Map map) {
+		this.danger = d;
 		this.pigeon = pigeon;
 		this.map = map;
 		this.vitesse = (float)15;
