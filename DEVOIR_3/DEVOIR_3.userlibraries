@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="javafx-sdk-11.0">
+    <archive path="C:/Program Files/Java/javafx-sdk-11.0.1" />
+  </library>
+</eclipse-userlibraries>
+
