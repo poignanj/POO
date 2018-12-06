@@ -31,8 +31,15 @@ public class Serveur {
 	private ServerSocket server = null;
 
 	private boolean isRunning = true;
+	private Socket client;
 	
-	  public Serveur(){
+	
+	private static Serveur instance = null;
+	/**
+	 *  Constructeur du serveur
+	 * 
+	 */
+	  private Serveur(){
 
 	      try {
 	         server = new ServerSocket(port, 100, InetAddress.getByName(host));
@@ -45,8 +52,12 @@ public class Serveur {
 	   }
 
 	   
-
-	   public Serveur(String pHost, int pPort){
+	  /**
+		 *  Constructeur du serveur 
+		 * @param pHost adresse du serveur
+		 * @param pPort port du serveur
+		 */
+	   private Serveur(String pHost, int pPort){
 	      host = pHost;
 	      port = pPort;
 	      try {
@@ -64,8 +75,10 @@ public class Serveur {
 
 	   
 
-	   //On lance notre serveur
-
+	   /**
+		 *  Lance le serveur 
+		 * 
+		 */
 	   public void open(){
 		  
 	      Thread t = new Thread(new Runnable(){
@@ -74,10 +87,9 @@ public class Serveur {
 	            while(isRunning == true){
 	               try {
 	            	  System.out.println("test");
-	                  Socket client = server.accept();
+	                  client = server.accept();
 	                  System.out.println("Connexion cliente reçue.");                  
-	                  Thread t = new Thread(/* to do add la gestion du joueur*/);
-	                  t.start();    
+	                    
 
 	               } catch (IOException e) {
 
@@ -96,22 +108,57 @@ public class Serveur {
 
 	   }
 
+	   /**
+		 *  Ferme le serveur 
+		 * 
+		 */
 	   public void close(){
 
 	      isRunning = false;
-
+	      try {
+			server.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+            server = null;
+		}
 	   } 
 	   
-	   public static void main(String[] args) {
-		   	  Jeu j = new Jeu();
-		      String host = "127.0.0.1";
-		      int port = 2345;
-		      
-		      Serveur ts = new Serveur(host, port);
-		      ts.open();
-		      
-		      System.out.println("Serveur initialisé.");
-		      j.jouer();
-		  
-		   }
+	   /**
+		 *  Instance du serveur 
+		 * 
+		 * @return Serveur renvoie l'instance du serveur
+		 */
+	   public static Serveur Instance()
+	    {   
+	        if (instance == null)
+	        {   
+	            synchronized(Serveur.class)
+	            {
+	                if (instance == null)
+	                {   instance = new Serveur();
+	                }
+	            }
+	        }
+	        return instance;
+	    }
+	   /**
+		 *  Instance du serveur 
+		 * @param pHost adresse du serveur
+		 * @param pPort port du serveur
+		 * @return Serveur renvoie l'instance du serveur
+		 */
+	   public static Serveur Instance(String pHost, int pPort)
+	    {   
+	        if (instance == null)
+	        {   
+	            synchronized(Serveur.class)
+	            {
+	                if (instance == null)
+	                {   instance = new Serveur(pHost, pPort);
+	                }
+	            }
+	        }
+	        return instance;
+	    }
+	   
 }
