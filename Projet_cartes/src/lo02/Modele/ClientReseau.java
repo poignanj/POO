@@ -47,7 +47,14 @@ public class ClientReseau extends Joueur {
 	 */
 	public void piocherCarte(Carte c) {
 		super.piocherCarte(c);
-		Socket sock = Serveur.Instance().getClient();
+		Serveur s = Serveur.Instance();
+		Socket sock = s.getClient();
+		if (s ==null) {
+			System.out.println("serveur NULL");
+		}
+		if (sock==null) {
+			System.out.println("Client NULL");
+		}
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			

@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import lo02.Modele.ChoixCouleurHumainIHM;
 import lo02.Modele.Humain;
 import lo02.Modele.Jeu;
+import lo02.Serveur.Serveur;
 /**
  * 
  * @author Jean-Jacques Poignant et Elise Poignant
@@ -35,6 +36,7 @@ public class GameFrame extends JFrame {
 	 * @param args arguments de main. Non utilisés
 	 */
 	public static void main(String[] args) {
+		Serveur.Instance().open();
 		GameClientFrame gc= new GameClientFrame();
 		Jeu j = new Jeu();
 		GameFrame g = new GameFrame((Humain) j.getListeJoueurs().get(0));

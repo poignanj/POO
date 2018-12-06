@@ -86,7 +86,7 @@ public class Serveur {
 	               try {
 	            	  System.out.println("test");
 	                  setClient(server.accept());
-	                  System.out.println("Connexion cliente re�ue.");                  
+	                  System.out.println("Connexion cliente recue.");                  
 	                    
 
 	               } catch (IOException e) {
@@ -164,6 +164,7 @@ public class Serveur {
 		 * @return Socket renvoie le socket du client
 		*/
 	   public Socket getClient() {
+		   if (client ==null) System.out.println("Client Vide");
 			return client;
 		}
 
@@ -171,8 +172,8 @@ public class Serveur {
 	 	*  Set le  socket du client 
 	 	* @param client  Socket client
 	 	*/
-		public void setClient(Socket client) {
-			this.client = client;
+		public void setClient(Socket cl) {
+			this.client = cl;
 		}
 	   
 }
