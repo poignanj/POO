@@ -20,12 +20,11 @@ public class TablePanel extends JPanel {
 	 */
 	public TablePanel() {
 		
-		JButton regle = new JButton("rêgles");
+		JButton regle = new JButton("règles");
 		regle.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Popup p;
 				StringBuilder sb = new StringBuilder();
 				sb.append("Les 8 permettent de changer de couleur à n’importe quel moment.\n" + 
@@ -77,7 +76,6 @@ public class TablePanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Popup p;
 				StringBuilder sb = new StringBuilder();
 				sb.append("Les 8 permettent de changer de couleur à n’importe quel moment.\n" + 
@@ -93,7 +91,7 @@ public class TablePanel extends JPanel {
 						"Si le joueur ne peut pas jouer une carte est ajouté à sa main\r\n" + 
 						"Si le joueur est débarassé de ses cartes il gagne");
 				JTextArea j = new JTextArea(sb.toString());
-				JFrame f = new JFrame("Rêgles");
+				JFrame f = new JFrame("Règles");
 				f.add(new JButton("Close"));
 				PopupFactory pf = new PopupFactory();
 				p = pf.getPopup(f,j,5,600);

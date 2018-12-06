@@ -80,15 +80,13 @@ public class Serveur {
 		 * 
 		 */
 	   public void open(){
-		  
 	      Thread t = new Thread(new Runnable(){
-
 	         public void run(){
 	            while(isRunning == true){
 	               try {
 	            	  System.out.println("test");
 	                  setClient(server.accept());
-	                  System.out.println("Connexion cliente reçue.");                  
+	                  System.out.println("Connexion cliente reï¿½ue.");                  
 	                    
 
 	               } catch (IOException e) {

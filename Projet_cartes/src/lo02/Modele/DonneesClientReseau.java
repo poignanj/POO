@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import Outils.Outil;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * 
@@ -16,30 +16,19 @@ import javafx.beans.Observable;
  *
  *	
  */
-public class DonneesClientReseau implements Observable {
-	private ArrayList<Carte> cartes;
+public class DonneesClientReseau extends Observable implements Observer {
+	private Joueur client;
 	private ArrayList<Integer> nbrCartes;
+	private int tourDeJeu;
 	private Carte talon;
 	private Socket serveur;
 	
-	public DonneesClientReseau() {
-		cartes = new ArrayList<>();
-		nbrCartes = new ArrayList<>();
-		for(int i = 0; i < 4; i++)
-		{
-			nbrCartes.add(7);
-		}
-		//TODO
-	}
-
-	@Override
-	public void addListener(InvalidationListener arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void removeListener(InvalidationListener arg0) {
-		// TODO Auto-generated method stub
+	public DonneesClientReseau(Joueur j) {
+		super();
+		client = j;
+		client.addObserver(this);
+		tourDeJeu = 0;
+		nbrCartes = new ArrayList<>();		
 	}
 	
 	/**
@@ -77,7 +66,7 @@ public class DonneesClientReseau implements Observable {
 
 	private void poserCarte(PrintWriter writer) {
 		Carte res = null;
-		// TODO Choisir la carte
+		res = client.getPose().poser(this.talon,client.getMain());
 		if(res == null)
 		{
 			writer.write("PIOCHE");
@@ -88,18 +77,19 @@ public class DonneesClientReseau implements Observable {
 			writer.write("POSE " + res.toString());
 			writer.flush();
 		}
+		
 	}
 
 	private void donnerCarte(PrintWriter writer) {
 		Carte res = null;
-		// TODO Choisir la carte
+		res = client.getDon().choixDonCarte(this.talon, this.client.getMain());
 		writer.write("DON " + res.toString());
 		writer.flush();
 	}
 
 	private void choixCouleur(PrintWriter writer) {
 		int res = -1;
-		// TODO Choisir la couleur
+		res = client.getChoix().choixCouleur(talon.getCouleur(), this.client.getMain());
 		writer.write("COULEUR " + res);
 		writer.flush();
 	}
@@ -107,6 +97,8 @@ public class DonneesClientReseau implements Observable {
 	private void majTalon(String talon) {
 		try {
 			this.talon = Carte.fromString(talon);
+			this.setChanged();
+			this.notifyObservers(this.talon);
 		} catch (Exception e) {
 			// TODO On fait quoi quand le string de la carte n'est pas valide? En théorie ça arrivera pas on peut ignorer
 			e.printStackTrace();
@@ -114,10 +106,31 @@ public class DonneesClientReseau implements Observable {
 	}
 
 	private void majNbrCartes(int joueur, int nbrCartes) {
-		this.nbrCartes.set(joueur, nbrCartes);		
+		this.nbrCartes.set((joueur+2) %4 , nbrCartes);
+		setChanged();
+		this.notifyObservers(nbrCartes);
 	}
 
 	private void majTour(int joueur) {
-		// TODO Auto-generated method stub
+		this.tourDeJeu = (joueur+2) %4;
 	}
+
+	public int getNumJoueur() {
+		return this.tourDeJeu;
+	}
+	
+	public Humain getHumain() {
+		return (Humain) this.client;
+	}
+
+	public Carte getPremiereCarteTalon() {
+		return talon;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		setChanged();
+		this.notifyObservers(arg);
+	}
+
 }

@@ -1,29 +1,38 @@
 package lo02.Vue;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import lo02.Modele.*;
+import lo02.Modele.Carte;
+import lo02.Modele.ChoixCouleurHumainIHM;
+import lo02.Modele.DonneesClientReseau;
+import lo02.Modele.Humain;
+import lo02.Modele.Jeu;
+import lo02.Modele.Joueur;
+import lo02.Modele.Table;
 
 /**
  * 
- * @author Jean-Jacques Poignant et Elise Poignant
+ * @author Jean-Jacques Poignant
  *
  */
-public class GamePanel extends JPanel implements Observer {
-	private Humain h;
+public class GameClientPanel extends JPanel implements Observer{
+	private DonneesClientReseau dataSet;
 
 	/**
 	 * Paramètre et crée le plateau de jeu.
 	 * 
-	 * @param h Humain
+	 * @param h 
+	 * 			Humain
 	 * 
 	 */
-	public GamePanel(Humain h) {
+	public GameClientPanel(Humain h) {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -40,7 +49,9 @@ public class GamePanel extends JPanel implements Observer {
 		this.add(new HandPanel(), c);
 		// this.getComponent(0).setPreferredSize(new Dimension((int)
 		// (this.getWidth()*0.5), (int) (this.getHeight()*0.70)));
-		this.h = h;
+		dataSet = new DonneesClientReseau(h);
+		dataSet.addObserver(this);
+		((ChoixCouleurHumainIHM) dataSet.getHumain().getChoix()).addObserver(this);
 		this.setVisible(true);
 	}
 
@@ -49,15 +60,13 @@ public class GamePanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof Joueur) {
-			if (((Joueur) o).getNumJoueur() == 0) {
-				this.afficherMain(((Joueur) o).getMain(), (Carte) arg);
+		if (o instanceof DonneesClientReseau) {
+			if (((DonneesClientReseau) o).getNumJoueur() == 2) {
+				this.afficherMain(((DonneesClientReseau) o).getHumain().getMain(), (Carte) arg);
 			} else {
-				this.afficherJoueur(((Joueur) o).getNumJoueur(), ((Joueur) o).getMain().size());
+				this.afficherJoueur(((DonneesClientReseau) o).getNumJoueur(), (int) arg);
 			}
-		}
-		if (o instanceof Table) {
-			this.afficherPlateau(((Table) arg).getPremiereCarteTalon());
+			if(arg instanceof Carte) this.afficherPlateau(((DonneesClientReseau) arg).getPremiereCarteTalon());
 		}
 		if (o instanceof ChoixCouleurHumainIHM) {
 			ArrayList<Carte> c = new ArrayList<Carte>();
@@ -92,7 +101,7 @@ public class GamePanel extends JPanel implements Observer {
 	 *            carte du talon
 	 */
 	public void afficherMain(ArrayList<Carte> main, Carte carte) {
-		HandPanel h = new HandPanel(main, this.h, carte);
+		HandPanel h = new HandPanel(main, this.dataSet.getHumain(), carte);
 		h.setVisible(true);
 		this.remove(1);
 		GridBagConstraints c = new GridBagConstraints();
@@ -138,7 +147,7 @@ public class GamePanel extends JPanel implements Observer {
 	 *            nombre de cartes dans la main du joueur
 	 */
 	public void afficherJoueur(int numJoueur, int nbCartes) {
-		this.getTablePanel().redrawIA(numJoueur, nbCartes);
+		this.getTablePanel().redrawIA((numJoueur+2) %4, nbCartes);
 		this.revalidate();
 		try {
 			Thread.sleep(100);
@@ -155,8 +164,8 @@ public class GamePanel extends JPanel implements Observer {
 	 */
 	public void tourJoueur(int numJoueur) {
 		resetCouleurs();
-		if (numJoueur != 0)
-			this.getTablePanel().changerCouleurJoueur(numJoueur);
+		if ((numJoueur+2) %4 != 0)
+			this.getTablePanel().changerCouleurJoueur((numJoueur+2) %4);
 		else
 			this.getComponent(1).setBackground(Color.LIGHT_GRAY);
 		this.revalidate();

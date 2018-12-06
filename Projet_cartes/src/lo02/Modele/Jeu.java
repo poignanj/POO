@@ -30,8 +30,8 @@ public class Jeu extends Observable {
 		this.listeJoueurs = new ArrayList<Joueur>();
 		this.plateau = new Table();
 		this.listeJoueurs.add(new Humain(0));
-		for (int i = 0; i < 2; i++)
-			this.listeJoueurs.add(new IAfacile(i + 1));
+		this.listeJoueurs.add(new IAfacile(1));
+		this.listeJoueurs.add(new ClientReseau(2));
 		this.listeJoueurs.add(new IAniveau1(3));
 
 	}
