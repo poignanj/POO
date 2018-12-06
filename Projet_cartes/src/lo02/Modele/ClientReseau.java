@@ -1,5 +1,13 @@
 package lo02.Modele;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.SocketException;
+
+import Outils.Outil;
+
 /**
  * @author Guillaume Paris
  *
@@ -8,15 +16,18 @@ package lo02.Modele;
 
 public class ClientReseau extends Joueur {
 
+	private Socket sock;
+	
 	/**
 	 * Constructeur de la classe ClientReseau
 	 * 
 	 * @param numJoueur emplacement du joueur
 	 */
-	public ClientReseau(int numJoueur) {
-		this.choix = new ChoixCouleurClientReseau();
-		this.don = new DonClientReseau();
-		this.pose = new PoseClientReseau();
+	public ClientReseau(int numJoueur, Socket sock) {
+		this.sock = sock;
+		this.choix = new ChoixCouleurClientReseau(sock);
+		this.don = new DonClientReseau(sock);
+		this.pose = new PoseClientReseau(sock);
 		this.numJoueur = numJoueur;
 	}
 
@@ -30,5 +41,27 @@ public class ClientReseau extends Joueur {
 	 */
 	public ClientReseau(ChoixDeCouleur choix, DonDeCarte don, PoseDeCarte pose, int numJoueur) {
 		super(choix, don, pose, numJoueur);
+	}
+
+	/**
+	 * Pioche une carte
+	 * 
+	 * @param c
+	 *            carte à piocher
+	 */
+	public void piocherCarte(Carte c) {
+		String response = "";
+		
+		try {
+			PrintWriter writer = new PrintWriter(sock.getOutputStream());
+			BufferedInputStream reader = new BufferedInputStream(sock.getInputStream());
+			
+			writer.write("PIOCHE " + c.toString());
+			writer.flush();
+		 }catch(SocketException e){
+            System.err.println("LA CONNEXION A ETE INTERROMPUE !");
+         }catch (IOException e) {
+            e.printStackTrace();
+         }
 	}
 }

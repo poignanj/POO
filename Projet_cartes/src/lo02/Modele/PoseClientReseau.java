@@ -17,6 +17,11 @@ import Outils.Outil;
  */
 
 public class PoseClientReseau implements PoseDeCarte {
+	private Socket sock;
+
+	public PoseClientReseau(Socket sock) {
+		this.sock = sock;
+	}
 
 	@Override
 	/**
@@ -30,7 +35,6 @@ public class PoseClientReseau implements PoseDeCarte {
 	 * @return carte carte choisie
 	 */
 	public Carte poser(Carte cTalon, ArrayList<Carte> main) {
-		Socket sock = null;
 		String response = "";
 		
 		try {
@@ -42,22 +46,26 @@ public class PoseClientReseau implements PoseDeCarte {
 
             response = Outil.read(reader);
 		 }catch(SocketException e){
-            System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+            System.err.println("LA CONNEXION A ETE INTERROMPUE !");
          }catch (IOException e) {
             e.printStackTrace();
          }
 		
 		Carte res = null;
 		
-		//Si la réponse du client serveur n'est pas valide, on considère qu'il pioche
+		//Si la réponse du client serveur n'est pas valide, on redemande
 		try {
 			String[] splitResponse = response.split(" ");
-			if(splitResponse[0] == "POSE")
+			if(splitResponse[0] == "PIOCHE")
+			{}
+			else if(splitResponse[0] == "POSE")
 				res = Carte.fromString(splitResponse[1]);
+			else
+				res = poser(cTalon, main);
 		}catch(Exception e) {
-			e.printStackTrace();
+			res = poser(cTalon, main);
 		}
-		
 		return res;
 	}
 }
+
