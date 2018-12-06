@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import Outils.Outil;
+import lo02.Serveur.Serveur;
 
 /**
  * @author Guillaume Paris
@@ -17,12 +18,6 @@ import Outils.Outil;
  */
 
 public class PoseClientReseau implements PoseDeCarte {
-	private Socket sock;
-
-	public PoseClientReseau(Socket sock) {
-		this.sock = sock;
-	}
-
 	@Override
 	/**
 	 * Pose une carte sur le talon
@@ -35,6 +30,7 @@ public class PoseClientReseau implements PoseDeCarte {
 	 * @return carte carte choisie
 	 */
 	public Carte poser(Carte cTalon, ArrayList<Carte> main) {
+		Socket sock = Serveur.Instance().getClient();
 		String response = "";
 		
 		try {

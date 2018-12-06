@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import Outils.Outil;
+import lo02.Serveur.Serveur;
 
 /**
  * @author Guillaume Paris
@@ -16,12 +17,6 @@ import Outils.Outil;
  *
  */
 public class DonClientReseau implements DonDeCarte {
-	private Socket sock;
-	
-	public DonClientReseau(Socket sock) {
-		this.sock = sock;
-	}
-
 	@Override
 	/**
 	 * Permet de choisir quelle carte le client réseau va donner
@@ -32,6 +27,7 @@ public class DonClientReseau implements DonDeCarte {
 	 * @return carte la carte choisie
 	 */
 	public Carte choixDonCarte(Carte cTalon, ArrayList<Carte> main) {
+		Socket sock = Serveur.Instance().getClient();
 		String response = "";
 		
 		try {

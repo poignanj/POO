@@ -19,8 +19,6 @@ import lo02.Modele.Table;
  *	Prévient le client réseau des mise à jour du jeu
  */
 public class ObserverUpdateClient implements Observer {
-	Socket sock = null;
-
 	@Override
 	/**
 	 * Met à jour les éléments le nécessitant quand ceux-ci s'update.
@@ -43,6 +41,7 @@ public class ObserverUpdateClient implements Observer {
 	 * @param nbrCartes nombre de carte du joueur
 	 */
 	private void majNbrCartes(int numJoueur, int nbrCartes) {
+		Socket sock = Serveur.Instance().getClient();
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
@@ -60,6 +59,7 @@ public class ObserverUpdateClient implements Observer {
 	 * @param premiereCarteTalon carte du talon
 	 */
 	private void majTalon(Carte premiereCarteTalon) {
+		Socket sock = Serveur.Instance().getClient();
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
@@ -77,6 +77,7 @@ public class ObserverUpdateClient implements Observer {
 	 * @param joueur joueur dont c'est le tour
 	 */
 	private void majTourJoueur(int joueur) {
+		Socket sock = Serveur.Instance().getClient();
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			

@@ -7,6 +7,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import Outils.Outil;
+import lo02.Serveur.Serveur;
 
 /**
  * @author Guillaume Paris
@@ -15,12 +16,6 @@ import Outils.Outil;
  */
 
 public class ChoixCouleurClientReseau implements ChoixDeCouleur {
-	private Socket sock;
-	
-	public ChoixCouleurClientReseau(Socket sock)
-	{
-		this.sock = sock;
-	}
 
 	@Override
 	/**
@@ -32,7 +27,7 @@ public class ChoixCouleurClientReseau implements ChoixDeCouleur {
 	 * @return c la couleur renvoyée
 	 */
 	public int choixCouleur(int couleur, ArrayList<Carte> main) {
-		Socket sock = null;
+		Socket sock = Serveur.Instance().getClient();
 		String response = "";
 		
 		try {

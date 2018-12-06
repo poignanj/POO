@@ -1,12 +1,12 @@
 package lo02.Modele;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
-import Outils.Outil;
+import lo02.Serveur.Serveur;
+
 
 /**
  * @author Guillaume Paris
@@ -15,19 +15,15 @@ import Outils.Outil;
  */
 
 public class ClientReseau extends Joueur {
-
-	private Socket sock;
-	
 	/**
 	 * Constructeur de la classe ClientReseau
 	 * 
 	 * @param numJoueur emplacement du joueur
 	 */
-	public ClientReseau(int numJoueur, Socket sock) {
-		this.sock = sock;
-		this.choix = new ChoixCouleurClientReseau(sock);
-		this.don = new DonClientReseau(sock);
-		this.pose = new PoseClientReseau(sock);
+	public ClientReseau(int numJoueur) {
+		this.choix = new ChoixCouleurClientReseau();
+		this.don = new DonClientReseau();
+		this.pose = new PoseClientReseau();
 		this.numJoueur = numJoueur;
 	}
 
@@ -50,11 +46,10 @@ public class ClientReseau extends Joueur {
 	 *            carte à piocher
 	 */
 	public void piocherCarte(Carte c) {
-		String response = "";
-		
+		super.piocherCarte(c);
+		Socket sock = Serveur.Instance().getClient();
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
-			BufferedInputStream reader = new BufferedInputStream(sock.getInputStream());
 			
 			writer.write("PIOCHE " + c.toString());
 			writer.flush();
