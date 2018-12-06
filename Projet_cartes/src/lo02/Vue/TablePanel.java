@@ -1,10 +1,12 @@
 package lo02.Vue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
 /**
  * 
  * @author Jean-Jacques Poignant et Elise Poignant
@@ -17,10 +19,41 @@ public class TablePanel extends JPanel {
 	 * Constructeur par défaut, crée 3 advesaires
 	 */
 	public TablePanel() {
+		
+		JButton regle = new JButton("rêgles");
+		regle.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Popup p;
+				StringBuilder sb = new StringBuilder();
+				sb.append("Les 8 permettent de changer de couleur à n’importe quel moment.\n" + 
+						"Les Jokers font piocher + 4 cartes au joueur suivant\n" + 
+						"Les Valets font sauter le tour du joueur suivant.\n" + 
+						"Les As font changer le sens du jeu.\n" + 
+						"Les 2 font font piocher + 2 cartes au joueur suivant\n"+
+						"7 Cartes sont distribuée au début du jeu\n"+
+						"Une carte ne peut être recouverte que par une carte :\r\n" + 
+						"	de même couleur\r\n" + 
+						"	de même valeur\r\n" + 
+						"	une carte spéciale\r\n" + 
+						"Si le joueur ne peut pas jouer une carte est ajouté à sa main\r\n" + 
+						"Si le joueur est débarassé de ses cartes il gagne");
+				JTextArea j = new JTextArea(sb.toString());
+				JFrame ftemp= new JFrame();
+				ftemp.add(j);
+				JFrame f = new JFrame("Rêgles");
+				f.add(new JButton("Close"));
+				PopupFactory pf = new PopupFactory();
+				p = pf.getPopup(f,ftemp,200,600);
+				p.show();
+			}
+		});
 		this.setLayout(new GridLayout(2, 3));
 		this.add(new JButton("Menu")); // 0
 		this.add(new IAButton("Adversaire 2")); // 1
-		this.add(new JButton("Récap")); // 2
+		this.add(regle); // 2
 		this.add(new IAButton("Adversaire 1"));// 3
 		this.add(new BoardPanel());// 4
 		this.add(new IAButton("Aversaire 3")); // 5
@@ -36,11 +69,43 @@ public class TablePanel extends JPanel {
 	public TablePanel(int nbJoueurs) {
 		this.setLayout(new GridLayout(2, 3));
 		this.nbJoueurs = nbJoueurs;
+
+// to do changer l'action performed to open a Popup message with the rules
+		
+		JButton regle = new JButton("rêgles");
+		regle.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Popup p;
+				StringBuilder sb = new StringBuilder();
+				sb.append("Les 8 permettent de changer de couleur à n’importe quel moment.\n" + 
+						"Les Jokers font piocher + 4 cartes au joueur suivant\n" + 
+						"Les Valets font sauter le tour du joueur suivant.\n" + 
+						"Les As font changer le sens du jeu.\n" + 
+						"Les 2 font font piocher + 2 cartes au joueur suivant\n"+
+						"7 Cartes sont distribuée au début du jeu\n"+
+						"Une carte ne peut être recouverte que par une carte :\r\n" + 
+						"	de même couleur\r\n" + 
+						"	de même valeur\r\n" + 
+						"	une carte spéciale\r\n" + 
+						"Si le joueur ne peut pas jouer une carte est ajouté à sa main\r\n" + 
+						"Si le joueur est débarassé de ses cartes il gagne");
+				JTextArea j = new JTextArea(sb.toString());
+				JFrame f = new JFrame("Rêgles");
+				f.add(new JButton("Close"));
+				PopupFactory pf = new PopupFactory();
+				p = pf.getPopup(f,j,200,600);
+				
+				p.show();
+			}
+		});
 		switch (nbJoueurs) {
 		case 2:
 			this.add(new JButton("Menu"));
 			this.add(new IAButton("Adversaire 1"));
-			this.add(new JButton("Récap"));
+			this.add(regle);
 			this.add(new JPanel());
 			this.add(new BoardPanel());
 			this.add(new JPanel());
@@ -48,7 +113,7 @@ public class TablePanel extends JPanel {
 		case 3:
 			this.add(new JButton("Menu"));
 			this.add(new JPanel());
-			this.add(new JButton("Récap"));
+			this.add(regle);
 			this.add(new IAButton("Adversaire 1"));
 			this.add(new BoardPanel());
 			this.add(new IAButton("Adversaire 2"));
@@ -56,7 +121,7 @@ public class TablePanel extends JPanel {
 		default:
 			this.add(new JButton("Menu"));
 			this.add(new IAButton("Adversaire 2"));
-			this.add(new JButton("Récap"));
+			this.add(regle);
 			this.add(new IAButton("Adversaire 1"));
 			this.add(new BoardPanel());
 			this.add(new IAButton("Aversaire 3"));

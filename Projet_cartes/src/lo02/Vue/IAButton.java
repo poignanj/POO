@@ -30,6 +30,7 @@ public class IAButton extends JButton {
 		this.setFont(new Font("Comic sans", Font.BOLD, 12));
 		this.setBackground(Color.WHITE);
 		this.setForeground(Color.BLACK);
+		this.setEnabled(false);
 	}
 	/**
 	 * Constructeur nommant et indiquant le nombre de cartes en main
@@ -44,5 +45,6 @@ public class IAButton extends JButton {
 		this.setFont(new Font("Comic sans", Font.BOLD, 12));
 		this.setBackground(Color.WHITE);
 		this.setForeground(Color.BLACK);
+		this.setEnabled(false);
 	}
 }
