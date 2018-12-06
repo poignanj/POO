@@ -14,6 +14,15 @@ import lo02.Modele.Humain;
 import lo02.Modele.Jeu;
 import lo02.Vue.GameFrame;
 
+/**
+ * 
+ * @author Vivien Piris
+ * 
+ * Affiche la carte du talon
+ * 
+ */
+
+
 public class Serveur {
 	private int port = 8080;
 

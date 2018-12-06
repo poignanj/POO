@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 /**
  * 
- * @author Jean-Jacques Poignant et Elise Poignant
+ * @author Jean-Jacques Poignant et Elise Poignant et Vivien Piris
  *
  */
 public class TablePanel extends JPanel {
@@ -46,7 +46,7 @@ public class TablePanel extends JPanel {
 				JFrame f = new JFrame("Rêgles");
 				f.add(new JButton("Close"));
 				PopupFactory pf = new PopupFactory();
-				p = pf.getPopup(f,ftemp,200,600);
+				p = pf.getPopup(f,ftemp,5,600);
 				p.show();
 			}
 		});
@@ -96,7 +96,7 @@ public class TablePanel extends JPanel {
 				JFrame f = new JFrame("Rêgles");
 				f.add(new JButton("Close"));
 				PopupFactory pf = new PopupFactory();
-				p = pf.getPopup(f,j,200,600);
+				p = pf.getPopup(f,j,5,600);
 				
 				p.show();
 			}
