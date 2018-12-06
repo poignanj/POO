@@ -58,7 +58,7 @@ public class Serveur {
 	   //On lance notre serveur
 
 	   public void open(){
-		  Jeu j = new Jeu();
+		  
 	      Thread t = new Thread(new Runnable(){
 
 	         public void run(){
@@ -94,7 +94,7 @@ public class Serveur {
 	   } 
 	   
 	   public static void main(String[] args) {
-		    
+		   	  Jeu j = new Jeu();
 		      String host = "127.0.0.1";
 		      int port = 2345;
 		      
@@ -102,7 +102,7 @@ public class Serveur {
 		      ts.open();
 		      
 		      System.out.println("Serveur initialisé.");
-		      
+		      j.jouer();
 		  
 		   }
 }
