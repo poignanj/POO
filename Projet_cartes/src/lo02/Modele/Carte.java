@@ -1,7 +1,10 @@
 package lo02.Modele;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
- * @author Jean-Jacques Poignant et Elise Poignant 
+ * @author Jean-Jacques Poignant, Elise Poignant et Guillaume Paris
  * 
  * La classe carte permet de définir les cartes
  */
@@ -10,12 +13,12 @@ public class Carte {
 	private int couleur;
 	private int modCouleur;
 	private Variante var;
-	private static String[] VALEURS = { "joker", "ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen",
-			"king" };
-	private static String[] COULEURS = { "diamonds", "spades", "hearts", "clubs", "red", "black" };
+	private static List<String> VALEURS = Arrays.asList("joker", "ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen",
+			"king" );
+	private static List<String> COULEURS = Arrays.asList("diamonds", "spades", "hearts", "clubs", "red", "black");
 
 	/**
-	 * Consrtucteur de carte
+	 * Constructeur de carte
 	 */
 	public Carte() {
 		this.valeur = 0;
@@ -42,6 +45,26 @@ public class Carte {
 		this.valeur = c.valeur;
 		this.couleur = c.couleur;
 		this.var = c.var;
+	}
+	
+	/**
+	 * Fonction permettant de récupérer la carte correspondant à un string (inverse de toString() )
+	 * @param str le string correspondant à la carte
+	 * @return c la carte correspondant à la chaîne de caractères
+	 * @throws Exception Si la chaîne de caractère ne correspond pas à une carte du jeu
+	 */
+	public static Carte fromString(String str) throws Exception {
+		String[] valCoul = str.split("_of_");
+		if(valCoul.length == 2)
+		{
+			int v = VALEURS.indexOf(valCoul[0]);
+			int c = COULEURS.indexOf(valCoul[1]);
+			if(v != -1 && c != -1)
+			{
+				return new Carte(v,c);
+			}
+		}
+		throw new Exception("Carte invalide");
 	}
 
 	/**
@@ -84,7 +107,7 @@ public class Carte {
 	 * Affiche la carte dans la console sous la forme "10_of_Carreau"
 	 */
 	public String toString() {
-		return Carte.VALEURS[this.valeur] + "_of_" + Carte.COULEURS[this.couleur];
+		return Carte.VALEURS.get(this.valeur) + "_of_" + Carte.COULEURS.get(this.couleur);
 	}
 
 	/**
