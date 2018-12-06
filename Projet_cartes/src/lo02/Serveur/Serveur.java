@@ -87,7 +87,7 @@ public class Serveur {
 	            while(isRunning == true){
 	               try {
 	            	  System.out.println("test");
-	                  client = server.accept();
+	                  setClient(server.accept());
 	                  System.out.println("Connexion cliente reçue.");                  
 	                    
 
@@ -160,5 +160,21 @@ public class Serveur {
 	        }
 	        return instance;
 	    }
+
+	   /**
+		 *  Get le socket du client  
+		 * @return Socket renvoie le socket du client
+		*/
+	   public Socket getClient() {
+			return client;
+		}
+
+		/**
+	 	*  Set le  socket du client 
+	 	* @param client  Socket client
+	 	*/
+		public void setClient(Socket client) {
+			this.client = client;
+		}
 	   
 }
