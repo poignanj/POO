@@ -31,7 +31,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 		client.addObserver(this);
 		tourDeJeu = 0;
 		nbrCartes = new ArrayList<>();
-		serveur = new Client("8080").start().getSocket();
+		serveur = Client.Instance("127.0.0.1").getSocket();
 		
 	}
 	

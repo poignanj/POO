@@ -55,7 +55,7 @@ public class Client  {
            synchronized(Client.class)
            {
                if (instance == null)
-               {   instance = new Client(s);
+               {   instance = new Client(pHost);
                }
            }
        }
