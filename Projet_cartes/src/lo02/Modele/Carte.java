@@ -1,5 +1,6 @@
 package lo02.Modele;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class Carte {
 	public Carte(int v, int c) {
 		this.valeur = v;
 		this.couleur = c;
+		boolean effet[] = { false, false, false, false, false, false, false, false, false, false };
+		var = new Variante(effet);
 	}
 
 	/**
@@ -61,7 +64,9 @@ public class Carte {
 			int c = COULEURS.indexOf(valCoul[1]);
 			if(v != -1 && c != -1)
 			{
-				return new Carte(v,c);
+				Carte m = new Carte(v,c);
+				m.getVar().setStopper(new ArrayList<Carte>());
+				return m;
 			}
 		}
 		throw new Exception("Carte invalide");

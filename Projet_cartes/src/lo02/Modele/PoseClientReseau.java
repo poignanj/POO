@@ -56,12 +56,20 @@ public class PoseClientReseau implements PoseDeCarte {
 			{}
 			else if(splitResponse[0] == "POSE")
 				res = Carte.fromString(splitResponse[1]);
-			else
+			else if(!main.get(getHandCard(res, main)).estJouableSur(cTalon)) {
+				System.out.println(main.get(getHandCard(res, main)).estJouableSur(cTalon));
 				res = poser(cTalon, main);
+			}
 		}catch(Exception e) {
 			res = poser(cTalon, main);
 		}
-		return res;
-	}
+		return main.remove(getHandCard(res, main));
+		}
+		private int getHandCard(Carte c,ArrayList<Carte> main) {
+			for(Carte ca : main) {
+				if(c.getCouleur() == ca.getCouleur() && ca.getValeur()==c.getValeur()) return main.indexOf(ca);
+			}
+			return -1;
+		}
 }
 

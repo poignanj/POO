@@ -27,6 +27,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 	
 	public DonneesClientReseau(Joueur j) {
 		super();
+		
 		client = j;
 		client.addObserver(this);
 		tourDeJeu = 2;
@@ -80,6 +81,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 	private void poserCarte(PrintWriter writer) {
 		Carte res = null;
 		res = client.getPose().poser(this.talon,client.getMain());
+		
 		if(res == null)
 		{
 			writer.write("PIOCHE");
@@ -87,6 +89,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 		}
 		else
 		{
+			System.out.println("POSE " + res.toString());
 			writer.write("POSE " + res.toString());
 			writer.flush();
 		}
@@ -158,5 +161,5 @@ public class DonneesClientReseau extends Observable implements Observer {
 		setChanged();
 		this.notifyObservers(arg);
 	}
-
+	
 }

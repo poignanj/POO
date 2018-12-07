@@ -57,6 +57,12 @@ public class DonClientReseau implements DonDeCarte {
 			res = choixDonCarte(cTalon, main);
 		}
 		
-		return res;
+		return main.remove(getHandCard(res, main));
+	}
+	private int getHandCard(Carte c,ArrayList<Carte> main) {
+		for(Carte ca : main) {
+			if(c.getCouleur() == ca.getCouleur() && ca.getValeur()==c.getValeur()) return main.indexOf(ca);
+		}
+		return -1;
 	}
 }
