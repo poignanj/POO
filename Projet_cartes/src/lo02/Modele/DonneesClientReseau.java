@@ -45,6 +45,8 @@ public class DonneesClientReseau extends Observable implements Observer {
 			while(!serveur.isClosed()) {
 				String response = "";
 		        response = Outil.read(reader);
+		        
+		        System.out.println(response);
 
 				String[] splitResponse = response.split(" ");
 				
@@ -61,6 +63,8 @@ public class DonneesClientReseau extends Observable implements Observer {
 								   break;
 				case "TOUR" : majTour(Integer.parseInt(splitResponse[1]));
 							  break;
+				case "PIOCHE" : pioche(splitResponse[1]);
+				  				break;
 				}
 			}
 		} catch (IOException e) {
@@ -104,7 +108,6 @@ public class DonneesClientReseau extends Observable implements Observer {
 			this.setChanged();
 			this.notifyObservers(this.talon);
 		} catch (Exception e) {
-			// TODO On fait quoi quand le string de la carte n'est pas valide? En théorie ça arrivera pas on peut ignorer
 			e.printStackTrace();
 		}
 	}
@@ -117,6 +120,15 @@ public class DonneesClientReseau extends Observable implements Observer {
 
 	private void majTour(int joueur) {
 		this.tourDeJeu = (joueur+2) %4;
+	}
+
+	private void pioche(String carte) {
+		try {
+			this.talon = Carte.fromString(carte);
+			//TODO Je sais pas ce que je dois faire ici '^^
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int getNumJoueur() {
