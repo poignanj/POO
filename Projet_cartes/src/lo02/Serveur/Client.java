@@ -1,17 +1,8 @@
 package lo02.Serveur;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 public class Client  {
 
@@ -27,15 +18,15 @@ public class Client  {
    
    public Client(String host ) {
 	     
-	      this.host=host;
-	      this.port=8080;
+	   this.host=host;
 	   }
 
-   public void start() {
+   public Client start() {
       try {
     	  socket = new Socket(InetAddress.getByName(host), port);
       } catch (IOException e) {
       }
+      return this;
    }
 
    private void close() {
@@ -44,6 +35,9 @@ public class Client  {
          socket.close();
       } catch (IOException ex) {
       }
+   }
+   public Socket getSocket() {
+	   return this.socket;
    }
 
 }

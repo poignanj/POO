@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import Outils.Outil;
+import lo02.Serveur.Client;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +30,9 @@ public class DonneesClientReseau extends Observable implements Observer {
 		client = j;
 		client.addObserver(this);
 		tourDeJeu = 0;
-		nbrCartes = new ArrayList<>();		
+		nbrCartes = new ArrayList<>();
+		serveur = new Client("8080").start().getSocket();
+		
 	}
 	
 	/**

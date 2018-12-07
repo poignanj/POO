@@ -36,8 +36,6 @@ public class GameFrame extends JFrame {
 	 * @param args arguments de main. Non utilisés
 	 */
 	public static void main(String[] args) {
-		Serveur.Instance().open();
-		GameClientFrame gc= new GameClientFrame();
 		Jeu j = new Jeu();
 		GameFrame g = new GameFrame((Humain) j.getListeJoueurs().get(0));
 		j.addObserver(g.getGamePanel());
@@ -47,7 +45,7 @@ public class GameFrame extends JFrame {
 				((ChoixCouleurHumainIHM) j.getListeJoueurs().get(i).getChoix()).addObserver(g.getGamePanel());
 		} 
 		j.getTable().addObserver(g.getGamePanel());
-		
+		Serveur.Instance().open();
 		
 		j.jouer();
 	}

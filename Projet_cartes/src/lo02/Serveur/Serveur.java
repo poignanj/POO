@@ -80,31 +80,19 @@ public class Serveur {
 		 * 
 		 */
 	   public void open(){
-	      Thread t = new Thread(new Runnable(){
-	         public void run(){
-	            while(isRunning == true){
-	               try {
-	            	  System.out.println("test");
-	                  setClient(server.accept());
-	                  System.out.println("Connexion cliente re�ue.");                  
-	                    
 
-	               } catch (IOException e) {
+           System.out.println("test");
+           try {
+             setClient(server.accept());
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+           System.out.println("Connexion cliente recue.");
 
-	                  e.printStackTrace();
-	               }
-	            }
-	            try {
-	               server.close();
-	            } catch (IOException e) {
-	               e.printStackTrace();
-	               server = null;
-	            }
-	        }
-	      });
-	      t.start();
 
-	   }
+
+
+} 	
 
 	   /**
 		 *  Ferme le serveur 
