@@ -9,7 +9,7 @@ public class Client  {
    private  int port = 8080;
    private Socket socket;
    private final String host;
-
+   private static Client instance = null;
    public Client(String host, int port ) {
      
       this.host=host;
@@ -36,8 +36,49 @@ public class Client  {
       } catch (IOException ex) {
       }
    }
+   
+   
    public Socket getSocket() {
 	   return this.socket;
+   }
+   
+   
+   /**
+  	 *  Instance du client 
+  	 * @param pHost adresse du serveur
+  	 * @return Client renvoie l'instance du Client
+  	 */
+   public static Client Instance(String pHost)
+   {   
+       if (instance == null)
+       {   
+           synchronized(Client.class)
+           {
+               if (instance == null)
+               {   instance = new Client(s);
+               }
+           }
+       }
+       return instance;
+   }
+  /**
+	 *  Instance du client 
+	 * @param pHost adresse du serveur
+	 * @param pPort port du serveur
+	 * @return Client renvoie l'instance du Client
+	 */
+  public static Client Instance(String pHost, int pPort)
+   {   
+       if (instance == null)
+       {   
+           synchronized(Client.class)
+           {
+               if (instance == null)
+               {   instance = new Client(pHost, pPort);
+               }
+           }
+       }
+       return instance;
    }
 
 }
