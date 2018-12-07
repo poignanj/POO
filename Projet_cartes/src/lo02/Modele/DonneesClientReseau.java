@@ -31,7 +31,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 		client.addObserver(this);
 		tourDeJeu = 0;
 		nbrCartes = new ArrayList<>();
-		serveur = Client.Instance("127.0.0.1").getSocket();
+		serveur = Client.Instance("127.0.0.1").start().getSocket();
 		
 	}
 	
@@ -124,8 +124,10 @@ public class DonneesClientReseau extends Observable implements Observer {
 
 	private void pioche(String carte) {
 		try {
-			this.talon = Carte.fromString(carte);
-			//TODO Je sais pas ce que je dois faire ici '^^
+			Carte c = Carte.fromString(carte);
+			this.getHumain().getMain().add(c);
+			setChanged();
+			this.notifyObservers(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

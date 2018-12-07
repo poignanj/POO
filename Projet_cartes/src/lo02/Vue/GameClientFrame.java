@@ -16,11 +16,11 @@ public class GameClientFrame extends JFrame {
 		this.setSize(1200, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setContentPane(new GamePanel(new Humain(2)));
+		this.setContentPane(new GameClientPanel(new Humain(2)));
 		this.setVisible(true);
 	}
 	public static void main(String[] args) {
-		Client.Instance("127.0.0.1").start();
+		//Client.Instance("127.0.0.1").start();
 		new GameClientFrame();
 	}
 }
