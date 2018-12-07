@@ -37,7 +37,7 @@ public class PoseClientReseau implements PoseDeCarte {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			BufferedInputStream reader = new BufferedInputStream(sock.getInputStream());
 			
-			writer.write("POSE");
+			writer.write("POSE/");
 			writer.flush();
 
             response = Outil.read(reader);

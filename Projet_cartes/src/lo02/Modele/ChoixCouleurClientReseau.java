@@ -34,7 +34,7 @@ public class ChoixCouleurClientReseau implements ChoixDeCouleur {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			BufferedInputStream reader = new BufferedInputStream(sock.getInputStream());
 			
-			writer.write("COULEUR " + couleur);
+			writer.write("COULEUR " + couleur + "/");
 			writer.flush();
 
             response = Outil.read(reader);

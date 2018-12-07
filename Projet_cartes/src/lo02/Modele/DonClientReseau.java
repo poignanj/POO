@@ -34,7 +34,7 @@ public class DonClientReseau implements DonDeCarte {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			BufferedInputStream reader = new BufferedInputStream(sock.getInputStream());
 			
-			writer.write("DON");
+			writer.write("DON/");
 			writer.flush();
 
             response = Outil.read(reader);

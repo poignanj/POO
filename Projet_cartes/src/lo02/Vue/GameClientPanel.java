@@ -19,7 +19,7 @@ import lo02.Modele.Table;
 
 /**
  * 
- * @author Jean-Jacques Poignant
+ * @author Jean-Jacques Poignant et Guillaume Paris
  *
  */
 public class GameClientPanel extends JPanel implements Observer{
@@ -61,12 +61,16 @@ public class GameClientPanel extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof DonneesClientReseau) {
-			if (((DonneesClientReseau) o).getNumJoueur() == 2) {
-				this.afficherMain(((DonneesClientReseau) o).getHumain().getMain(), (Carte) arg);
-			} else {
-				this.afficherJoueur(((DonneesClientReseau) o).getNumJoueur(), (int) arg);
+			if(arg instanceof Carte) this.afficherPlateau(((DonneesClientReseau) o).getPremiereCarteTalon());
+			else if (arg instanceof Float) {
+				this.tourJoueur((int)(float)arg);
 			}
-			if(arg instanceof Carte) this.afficherPlateau(((DonneesClientReseau) arg).getPremiereCarteTalon());
+			else if (arg instanceof Integer && ((int)arg %10 != 2)) {
+				this.afficherJoueur((int) arg % 10, (int) arg / 10);
+			}
+			else if (((DonneesClientReseau) o).getNumJoueur() == 2) {
+				this.afficherMain(((DonneesClientReseau) o).getHumain().getMain(), ((DonneesClientReseau) o).getPremiereCarteTalon());
+			}
 		}
 		if (o instanceof ChoixCouleurHumainIHM) {
 			ArrayList<Carte> c = new ArrayList<Carte>();
@@ -90,6 +94,15 @@ public class GameClientPanel extends JPanel implements Observer{
 	 */
 	public TablePanel getTablePanel() {
 		return (TablePanel) this.getComponent(0);
+	}
+
+	/**
+	 * renvoie le composant correspondant à la gestion des données
+	 * 
+	 * @return DonneesClientReseau composant correspondant à la gestion des données
+	 */
+	public DonneesClientReseau getDataSet() {
+		return dataSet;
 	}
 
 	/**
@@ -147,7 +160,7 @@ public class GameClientPanel extends JPanel implements Observer{
 	 *            nombre de cartes dans la main du joueur
 	 */
 	public void afficherJoueur(int numJoueur, int nbCartes) {
-		this.getTablePanel().redrawIA((numJoueur+2) %4, nbCartes);
+		this.getTablePanel().redrawIA((numJoueur+2)%4, nbCartes);
 		this.revalidate();
 		try {
 			Thread.sleep(100);

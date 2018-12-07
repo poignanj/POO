@@ -58,7 +58,7 @@ public class ClientReseau extends Joueur {
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
-			writer.write("PIOCHE " + c.toString());
+			writer.write("PIOCHE " + c.toString() + "/");
 			writer.flush();
 		 }catch(SocketException e){
             System.err.println("LA CONNEXION A ETE INTERROMPUE !");

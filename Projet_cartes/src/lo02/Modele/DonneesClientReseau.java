@@ -29,10 +29,11 @@ public class DonneesClientReseau extends Observable implements Observer {
 		super();
 		client = j;
 		client.addObserver(this);
-		tourDeJeu = 0;
+		tourDeJeu = 2;
 		nbrCartes = new ArrayList<>();
-		serveur = Client.Instance("127.0.0.1").start().getSocket();
-		
+		for(int i = 0; i < 4; i++)
+			nbrCartes.add(0);
+		serveur = Client.Instance().getSocket();
 	}
 	
 	/**
@@ -45,26 +46,30 @@ public class DonneesClientReseau extends Observable implements Observer {
 			while(!serveur.isClosed()) {
 				String response = "";
 		        response = Outil.read(reader);
-		        
-		        System.out.println(response);
 
-				String[] splitResponse = response.split(" ");
-				
-				switch(splitResponse[0]) {
-				case "POSE" : poserCarte(writer);
-							  break;
-				case "DON" : donnerCarte(writer);
-							 break;
-				case "COULEUR" : choixCouleur(writer);
+				String[] messages = response.split("/");
+				for(int i = 0; i < messages.length; i++)
+				{
+			        System.out.println("CLIENT " + messages[i]);
+
+					String[] splitResponse = messages[i].split(" ");
+					
+					switch(splitResponse[0]) {
+					case "POSE" : poserCarte(writer);
+								  break;
+					case "DON" : donnerCarte(writer);
 								 break;
-				case "TALON" : majTalon(splitResponse[1]);
-							   break;
-				case "NBRCARTES" : majNbrCartes(Integer.parseInt(splitResponse[1]), Integer.parseInt(splitResponse[2]));
+					case "COULEUR" : choixCouleur(writer);
+									 break;
+					case "TALON" : majTalon(splitResponse[1]);
 								   break;
-				case "TOUR" : majTour(Integer.parseInt(splitResponse[1]));
-							  break;
-				case "PIOCHE" : pioche(splitResponse[1]);
-				  				break;
+					case "NBRCARTES" : majNbrCartes(Integer.parseInt(splitResponse[1]), Integer.parseInt(splitResponse[2]));
+									   break;
+					case "TOUR" : majTour(Integer.parseInt(splitResponse[1]));
+								  break;
+					case "PIOCHE" : pioche(splitResponse[1]);
+					  				break;
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -113,13 +118,16 @@ public class DonneesClientReseau extends Observable implements Observer {
 	}
 
 	private void majNbrCartes(int joueur, int nbrCartes) {
-		this.nbrCartes.set((joueur+2) %4 , nbrCartes);
+		int j = joueur;
+		this.nbrCartes.set(j , nbrCartes);
 		setChanged();
-		this.notifyObservers(nbrCartes);
+		this.notifyObservers(10 * nbrCartes + j);
 	}
 
 	private void majTour(int joueur) {
-		this.tourDeJeu = (joueur+2) %4;
+		this.tourDeJeu = joueur;
+		setChanged();
+		this.notifyObservers((float) joueur);
 	}
 
 	private void pioche(String carte) {
@@ -127,7 +135,7 @@ public class DonneesClientReseau extends Observable implements Observer {
 			Carte c = Carte.fromString(carte);
 			this.getHumain().getMain().add(c);
 			setChanged();
-			this.notifyObservers(c);
+			this.notifyObservers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

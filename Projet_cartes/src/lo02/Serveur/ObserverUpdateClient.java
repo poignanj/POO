@@ -45,7 +45,7 @@ public class ObserverUpdateClient implements Observer {
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
-			writer.write("NBRCARTES " + numJoueur + " " + nbrCartes);
+			writer.write("NBRCARTES " + numJoueur + " " + nbrCartes + "/");
 			writer.flush();
 		 }catch(SocketException e){
             System.err.println("LA CONNEXION A ETE INTERROMPUE !");
@@ -63,7 +63,7 @@ public class ObserverUpdateClient implements Observer {
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
-			writer.write("TALON " + premiereCarteTalon.toString());
+			writer.write("TALON " + premiereCarteTalon.toString() + "/");
 			writer.flush();
 		 }catch(SocketException e){
             System.err.println("LA CONNEXION A ETE INTERROMPUE !");
@@ -81,7 +81,7 @@ public class ObserverUpdateClient implements Observer {
 		try {
 			PrintWriter writer = new PrintWriter(sock.getOutputStream());
 			
-			writer.write("TOUR " + joueur);
+			writer.write("TOUR " + joueur + "/");
 			writer.flush();
 		 }catch(SocketException e){
             System.err.println("LA CONNEXION A ETE INTERROMPUE !");
