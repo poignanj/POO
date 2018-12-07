@@ -49,7 +49,7 @@ public class DonClientReseau implements DonDeCarte {
 		//Si la réponse du client serveur n'est pas valide, on redemande
 		try {
 			String[] splitResponse = response.split(" ");
-			if(splitResponse[0] == "DON")
+			if(splitResponse[0].equals("DON"))
 				res = Carte.fromString(splitResponse[1]);
 			else
 				res = choixDonCarte(cTalon, main);

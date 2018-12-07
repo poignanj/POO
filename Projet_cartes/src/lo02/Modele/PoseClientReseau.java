@@ -41,6 +41,7 @@ public class PoseClientReseau implements PoseDeCarte {
 			writer.flush();
 
             response = Outil.read(reader);
+            System.out.println("SERVEUR " + response);
 		 }catch(SocketException e){
             System.err.println("LA CONNEXION A ETE INTERROMPUE !");
          }catch (IOException e) {
@@ -52,18 +53,22 @@ public class PoseClientReseau implements PoseDeCarte {
 		//Si la réponse du client serveur n'est pas valide, on redemande
 		try {
 			String[] splitResponse = response.split(" ");
-			if(splitResponse[0] == "PIOCHE")
-			{}
-			else if(splitResponse[0] == "POSE")
+			if(splitResponse[0].equals("POSE")) {
 				res = Carte.fromString(splitResponse[1]);
-			else if(!main.get(getHandCard(res, main)).estJouableSur(cTalon)) {
+			}
+			else if(splitResponse[0].equals("PIOCHE"))
+			{}
+			if(res != null && !main.get(getHandCard(res, main)).estJouableSur(cTalon)) {
 				System.out.println(main.get(getHandCard(res, main)).estJouableSur(cTalon));
 				res = poser(cTalon, main);
 			}
 		}catch(Exception e) {
 			res = poser(cTalon, main);
 		}
-		return main.remove(getHandCard(res, main));
+		if(res != null)
+			return main.remove(getHandCard(res, main));
+		else
+			return null;
 		}
 		private int getHandCard(Carte c,ArrayList<Carte> main) {
 			for(Carte ca : main) {

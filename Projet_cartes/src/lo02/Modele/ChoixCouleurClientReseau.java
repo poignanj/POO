@@ -49,7 +49,7 @@ public class ChoixCouleurClientReseau implements ChoixDeCouleur {
 		//Si la réponse du client serveur n'est pas valide, on redemande
 		try {
 			String[] splitResponse = response.split(" ");
-			if(splitResponse[0] == "COULEUR")
+			if(splitResponse[0].equals("COULEUR"))
 				res = Integer.parseInt(splitResponse[1]);
 			else
 				res = choixCouleur(couleur, main);
