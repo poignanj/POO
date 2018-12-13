@@ -29,7 +29,7 @@ public class Adaptateur implements Runnable {
 		// TODO Auto-generated method stub
 		this.SensorStarted=true;
 		while(SensorStarted) {
-			
+			verifyState(Link);
 			
 			try {
 				Thread.sleep(FrequenceActualisation);
