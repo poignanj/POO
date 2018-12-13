@@ -1,7 +1,8 @@
+import java.io.File;
 
-public class Sensor implements Runnable {
+public class Adaptateur implements Runnable {
 	String SID;
-	float FrequenceActualisation;
+	long FrequenceActualisation;
 	public String getSID() {
 		return SID;
 	}
@@ -11,7 +12,7 @@ public class Sensor implements Runnable {
 	public float getFrequenceActualisation() {
 		return FrequenceActualisation;
 	}
-	public void setFrequenceActualisation(float frequenceActualisation) {
+	public void setFrequenceActualisation(long frequenceActualisation) {
 		FrequenceActualisation = frequenceActualisation;
 	}
 	public String getLink() {
@@ -37,7 +38,7 @@ public class Sensor implements Runnable {
 	public void setPresenceVehicle(boolean presenceVehicle) {
 		this.presenceVehicle = presenceVehicle;
 	}
-	public Sensor(String sid,String link, float frequence) {
+	public Adaptateur(String sid,String link, long frequence) {
 		this.Link=link;
 		this.SID=sid;
 		this.FrequenceActualisation=frequence;
@@ -46,7 +47,22 @@ public class Sensor implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		this.SensorStarted=true;
+		while(SensorStarted) {
+			
+			
+			try {
+				Thread.sleep(FrequenceActualisation);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+	}
+	private void verifyState(String link) {
+		File f= new File(link);
+		//f.rea
 	}
 
 }
