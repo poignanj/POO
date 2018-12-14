@@ -30,7 +30,7 @@ public class Simulateur implements Runnable {
 		while(true) {
 			Path dir = Paths.get(cheminDossier);
 			
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*")) {
+			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.txt")) {
 			    for (Path file : stream) {
 			    	if(!senseurs.containsKey(file))
 			    	{
