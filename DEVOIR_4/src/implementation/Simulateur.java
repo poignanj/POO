@@ -86,7 +86,7 @@ public class Simulateur implements Runnable {
 	{
 		TreeMap<String, Boolean> res = new TreeMap<>();
 		senseurs.forEach((sid, adaptateur) -> {
-			res.put(sid, false); //TODO
+			res.put(sid, adaptateur.isPresenceVehicle());
 		});
 		return res;
 	}
