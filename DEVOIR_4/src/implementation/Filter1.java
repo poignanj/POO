@@ -7,7 +7,7 @@ import interfaces.IFilter;
 public class Filter1 implements IFilter {
 	private Simulateur sim;
 
-	Filter1(Simulateur sim)
+	public Filter1(Simulateur sim)
 	{
 		this.sim = sim;
 	}

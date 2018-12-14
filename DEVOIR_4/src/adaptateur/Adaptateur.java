@@ -31,7 +31,6 @@ public class Adaptateur implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		this.SensorStarted=true;
 		while(SensorStarted) {
 			verifyState(Link);
@@ -39,7 +38,6 @@ public class Adaptateur implements Runnable {
 			try {
 				Thread.sleep(FrequenceActualisation);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -53,7 +51,6 @@ public class Adaptateur implements Runnable {
 			String s = br.readLine();
 			presenceVehicle=s.contains("1");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 	}

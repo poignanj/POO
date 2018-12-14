@@ -12,14 +12,14 @@ public class Filter2 implements IFilter {
 
 	private TreeMap<String, String> lastStates;
 	
-	Filter2(IFilter filter)
+	public Filter2(IFilter filter)
 	{
 		this.filter = filter;
 		lastStates = new TreeMap<>();
 		isBranchedFilter = true;
 	}
 	
-	Filter2(Simulateur sim)
+	public Filter2(Simulateur sim)
 	{
 		this.sim = sim;
 		lastStates = new TreeMap<>();
