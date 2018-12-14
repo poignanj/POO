@@ -1,13 +1,17 @@
 package adaptateur;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Adaptateur implements Runnable {
 	String SID;
 	long FrequenceActualisation;
 	String Link;
 	boolean SensorStarted = true;
-	boolean presenceVehicle;
+	boolean presenceVehicle=false;
 	
 	
 	public boolean isPresenceVehicle() {
@@ -41,8 +45,16 @@ public class Adaptateur implements Runnable {
 		
 	}
 	private void verifyState(String link) {
-		File f= new File(link);
-		//f.rea
+		
+		try {
+			File f= new File(link);
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			String s = br.readLine();
+			presenceVehicle=s.contains("1");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }
