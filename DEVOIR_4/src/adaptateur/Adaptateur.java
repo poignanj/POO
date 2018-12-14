@@ -2,7 +2,6 @@ package adaptateur;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -17,11 +16,13 @@ public class Adaptateur implements Runnable {
 	public boolean isPresenceVehicle() {
 		return presenceVehicle;
 	}
-	public void setPresenceVehicle(boolean presenceVehicle) {
-		this.presenceVehicle = presenceVehicle;
+	
+	
+	public String getSID() {
+		return SID;
 	}
-	
-	
+
+
 	public Adaptateur(String sid,String link, long frequence) {
 		this.Link=link;
 		this.SID=sid;
