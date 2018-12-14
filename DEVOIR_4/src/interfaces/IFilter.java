@@ -1,4 +1,7 @@
 package interfaces;
-public interface IFilter {
 
+import java.util.TreeMap;
+
+public interface IFilter {
+	TreeMap<String, String> GetStates();
 }

@@ -16,7 +16,7 @@ import adaptateur.Adaptateur;
 public class Simulateur implements Runnable {
 	private String cheminDossier;
 	private long tempsRaffraichissement;
-	private TreeMap<String, Adaptateur> senseurs;
+	private TreeMap<Path, Adaptateur> senseurs;
 	
 	public Simulateur(String cheminDossier, long tempsRaffraichissement)
 	{
@@ -32,42 +32,45 @@ public class Simulateur implements Runnable {
 			
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*")) {
 			    for (Path file : stream) {
-			    	try{
-				    	InputStream flux = new FileInputStream(file.toString()); 
-				    	InputStreamReader lecture=new InputStreamReader(flux);
-				    	BufferedReader buff=new BufferedReader(lecture);
-				    	String ligne;
-				    	String sid = "";
-				    	String lnk = "";
-				    	long frq = -1;
-				    	while ((ligne=buff.readLine())!=null){
-				    		String[] ligneDecoupee = ligne.split(" ");
-				    		switch(ligneDecoupee[0])
-				    		{
-					    		case "SID:":
+			    	if(!senseurs.containsKey(file))
+			    	{
+				    	try{
+					    	InputStream flux = new FileInputStream(file.toString()); 
+					    	InputStreamReader lecture=new InputStreamReader(flux);
+					    	BufferedReader buff=new BufferedReader(lecture);
+					    	String ligne;
+					    	String sid = "";
+					    	String lnk = "";
+					    	long frq = -1;
+					    	while ((ligne=buff.readLine())!=null){
+					    		String[] ligneDecoupee = ligne.split(" ");
+					    		switch(ligneDecoupee[0])
 					    		{
-					    			sid = ligneDecoupee[1];
-					    			break;
+						    		case "SID:":
+						    		{
+						    			sid = ligneDecoupee[1];
+						    			break;
+						    		}
+						    		case "FRQ:":
+						    		{
+						    			frq = (long)(1000.0 / Float.parseFloat(ligneDecoupee[1]));
+						    			break;
+						    		}
+						    		case "LNK:":
+						    		{
+						    			lnk = dir.resolve(ligneDecoupee[1]).toString();
+						    			break;
+						    		}
 					    		}
-					    		case "FRQ:":
-					    		{
-					    			frq = (long)(1000.0 / Float.parseFloat(ligneDecoupee[1]));
-					    			break;
-					    		}
-					    		case "LNK:":
-					    		{
-					    			lnk = dir.resolve(ligneDecoupee[1]).toString();
-					    			break;
-					    		}
-				    		}
+					    	}
+					    	if(frq > 0 && sid != "" && lnk != "")
+					    	{
+					    		senseurs.put(file, new Adaptateur(sid, lnk, frq));
+					    	}
+					    	buff.close(); 
+				    	} catch (Exception e){
+				    		System.out.println(e.toString());
 				    	}
-				    	if(frq > 0 && sid != "" && lnk != "")
-				    	{
-				    		senseurs.put(sid, new Adaptateur(sid, lnk, frq));
-				    	}
-				    	buff.close(); 
-			    	} catch (Exception e){
-			    		System.out.println(e.toString());
 			    	}
 			    }
 			} catch (IOException e1) {
@@ -82,11 +85,11 @@ public class Simulateur implements Runnable {
 		}
 	}	
 	
-	public TreeMap<String, Boolean> GetStates()
+	public TreeMap<String, String> GetStates()
 	{
-		TreeMap<String, Boolean> res = new TreeMap<>();
-		senseurs.forEach((sid, adaptateur) -> {
-			res.put(sid, adaptateur.isPresenceVehicle());
+		TreeMap<String, String> res = new TreeMap<>();
+		senseurs.forEach((file, adaptateur) -> {
+			res.put(adaptateur.getSID(), adaptateur.isPresenceVehicle() ? "1" : "0");
 		});
 		return res;
 	}
