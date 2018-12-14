@@ -1,0 +1,3 @@
+SID: Senseur1
+FRQ: 0.3
+LNK: ./Senseurs/senseur1.txt
