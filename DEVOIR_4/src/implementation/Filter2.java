@@ -6,24 +6,23 @@ import interfaces.IFilter;
 
 public class Filter2 implements IFilter {
 	private Simulateur sim;
-	private TreeMap<String, Boolean> lastStatesSim;
+	private IFilter filter;
 	
 	private boolean isBranchedFilter;
 
-	private IFilter filter;
-	private TreeMap<String, String> lastStatesFilter;
+	private TreeMap<String, String> lastStates;
 	
 	Filter2(IFilter filter)
 	{
 		this.filter = filter;
-		lastStatesFilter = new TreeMap<>();
+		lastStates = new TreeMap<>();
 		isBranchedFilter = true;
 	}
 	
 	Filter2(Simulateur sim)
 	{
 		this.sim = sim;
-		lastStatesSim = new TreeMap<>();
+		lastStates = new TreeMap<>();
 		isBranchedFilter = false;
 	}
 
@@ -41,9 +40,9 @@ public class Filter2 implements IFilter {
 		}
 
 		InResults.forEach((sid, data) -> {
-			if(data != lastStatesFilter.get(sid))
+			if(data != lastStates.get(sid))
 			{
-				lastStatesFilter.put(sid, data);
+				lastStates.put(sid, data);
 				res.put(sid, data);
 			}
 		});
